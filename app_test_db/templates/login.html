@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Đăng nhập </title>
+    <link rel="stylesheet" href="{% static "css/loginAndRegistration.css" %}">
+   </head>
+<body>
+  <div class="wrapper">
+    <div class="logo-wrapper flex">
+        <img class="logo" src="/logo/logo.png" alt="">
+    </div>
+    <div class="title-container flex">
+        <h2>Đăng nhập</h2>
+    </div>
+    <form method="post" action="">
+      {% csrf_token %}
+      <div class="input-box">
+        <input type="text" name="phone" placeholder="Số điện thoại" required>
+      </div>
+      <div class="input-box">
+        <input type="password" name="password" placeholder="Mật khẩu" required>
+      </div>
+      <div class="input-box button">
+        <input type="Submit" value="Đăng nhập">
+      </div>
+    </form>
+  </div>
+</body>
+</html>

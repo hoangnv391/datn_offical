@@ -130,11 +130,22 @@ class motorbike_skus(models.Model):
 # 6th table: users
 class users(models.Model):
     user_id = models.AutoField(primary_key=True)
-    phone = models.DecimalField(max_digits=15, decimal_places=0,
-                                # blank=False, null=False,
-                                # unique=True,
-                                verbose_name='Số điện thoại'
-                                )
+
+    # phone = models.DecimalField(max_digits=15, decimal_places=0,
+    #                             # blank=False, null=False,
+    #                             blank=True, null=True,
+    #                             # unique=True,
+    #                             verbose_name='Số điện thoại',
+    #                             )
+
+    phone = models.CharField(
+                            max_length=20,
+                            # max_digits=15, decimal_places=0,
+                            # blank=False, null=False,
+                            blank=True, null=True,
+                            # unique=True,
+                            verbose_name='Số điện thoại',
+                            )
 
     password = models.CharField(max_length=50,
                                 null=True, blank=True,
@@ -144,24 +155,24 @@ class users(models.Model):
     # password = models.
     full_name = models.CharField(max_length=100,
                                 #  blank=False, null=False,
-                                 verbose_name='Họ và tên đầy đủ'
-                                 )
+                                blank=True, null=True,
+                                verbose_name='Họ và tên đầy đủ',
+                                )
 
     address = models.CharField(max_length=500,
                             #    blank=False, null=False,
-                               verbose_name='Địa chỉ'
-                               )
+                               blank=True, null=True,
+                               verbose_name='Địa chỉ',)
 
     email = models.EmailField(
                                 # blank=False, null=False,
-                                null=True, blank=True,
-
-                            #   unique=True,
-                              verbose_name='Email'
-                              )
+                                blank=True, null=True,
+                                unique=True,
+                                verbose_name='Email',
+                                )
 
     def __str__(self) -> str:
-        return f"{self.full_name}"
+        return f"{self.full_name} - {self.phone}"
 
     class Meta:
         verbose_name_plural = 'users'
