@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import UserForm
-from .models import users
+from .models import users, brands, motorbikes, motorbike_skus
 
 # Create your views here.
 def login(request):
@@ -59,3 +59,17 @@ def signup(request):
 
     else:
         return render(request, "registration.html")
+
+def home(request):
+    motor_brands = brands.objects.all().order_by('brand_order')
+    motorbike_list = motorbikes.objects.all()
+
+    print(motorbike_list)
+
+    return render(request, "hometest.html", {
+        'brands': motor_brands,
+        'motorbikes': motorbike_list,
+
+    })
+
+

@@ -40,7 +40,8 @@ class motor_types(models.Model):
 class brands(models.Model):
     brand_id = models.AutoField(primary_key=True)
     brand_name = models.CharField(max_length=50, unique=True, null=False, verbose_name='Tên thương hiệu')
-    brand_image = models.ImageField(upload_to='brand_images', null=True)
+    brand_image = models.FileField(upload_to='brand_images', null=True)
+    brand_order = models.IntegerField(null=True)
 
     def __str__(self) -> str:
         return f"{self.brand_name}"

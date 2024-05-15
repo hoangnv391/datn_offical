@@ -1,0 +1,1837 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link rel="stylesheet" href="{% static "fonts/hyundai-sans/stylesheet.css" %}">
+    <link rel="stylesheet" href="{% static "fonts/Raleway/stylesheet.css" %}">
+    <link rel="stylesheet" href="{% static "lib/swiper-11.1.1/package/swiper-bundle.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/font-awesome-4.7.0/css/font-awesome.min.css" %}">
+</head>
+<body>
+
+    <header id="header">
+        <div class="header-wrapper wrapper">
+
+            <div id="masthead" class="header-inner">
+
+                <!-- Logo -->
+                <div id="logo" class="logo header-item">
+                    <a href="/" class="logo-link">
+                        <img src="{% static "imgs/logo/horozontal_logo.png" %}" alt="store-logo">
+                    </a>
+                </div>
+
+                <div id="store-name" class="header-item">
+                    <a href="/">Xe máy Tuấn Mạnh</a>
+                </div>
+
+            </div>
+
+            <div id="wide-nav">
+                <ul id="header-nav">
+                    <li class="header-nav-item"><a href="#">Trang chủ</a></li>
+                    <li class="header-nav-item"><a href="#">Hãng xe</a></li>
+                    <li class="header-nav-item"><a href="#">Dòng xe</a></li>
+                    <li class="header-nav-item header-search"><a href="#">Tìm kiếm</a></li>
+                    <li class="header-nav-item"><a href="#">Giỏ hàng</a></li>
+                    <li class="header-nav-item"><a href="#">Đăng nhập</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- Start: Slider section -->
+        <div class="slider">
+                <!-- Slider main container -->
+            <div class="swiper">
+                <!-- Additional required wrapper -->
+                <div class="swiper-wrapper">
+                <!-- Slides -->
+                    <div class="swiper-slide"><img src="{% static "imgs/slider/winner-cbr.png" %}" alt=""></div>
+                    <div class="swiper-slide"><img src="{% static "imgs/slider/air-blade.jpg" %}" alt=""></div>
+                    <div class="swiper-slide"><img src="{% static "imgs/slider/vario.jpg" %}" alt=""></div>
+                    <div class="swiper-slide"><img src="{% static "imgs/slider/sh.jpg" %}" alt=""></div>
+                    <div class="swiper-slide"><img src="{% static "imgs/slider/lead.jpg" %}" alt=""></div>
+                    <div class="swiper-slide"><img src="{% static "imgs/slider/cbr.jpg" %}" alt=""></div>
+                    <div class="swiper-slide"><img src="{% static "imgs/slider/blade.jpg" %}" alt=""></div>
+
+                </div>
+
+                <!-- If we need pagination -->
+                <div class="swiper-pagination"></div>
+
+                <!-- If we need navigation buttons -->
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+
+            </div>
+
+        </div>
+        <!-- End: Slider section -->
+
+        <!-- Start: Branch banner section -->
+        <div class="branch-banner">
+            <div class="gap-element"></div>
+            <div class="branch-banner-wrapper wrapper">
+                <div class="section-title-container">
+                    <h1 class="section-title">
+                        <b></b>
+                        <span class="section-title-main">
+                            KHÁM PHÁ DÒNG XE
+                        </span>
+                        <b></b>
+                    </h1>
+                </div>
+                <div class="branch-category flex">
+                {% for brand in brands %}
+                    <li class="branch-category-item"><a href="#"><img class="hover-zoom-1-2" src="{{ brand.brand_image.url }}" alt="honda-logo"></a></li>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- End: Branch banner section -->
+
+        <div class="product honda">
+            <div class="gap-element"></div>
+
+            <div class="product-wrapper wrapper">
+                <div class="section-title-container">
+                    <h1 class="section-title">
+                        <b></b>
+                        <span class="section-title-main">
+                            HONDA
+                        </span>
+                        <b></b>
+                    </h1>
+                </div>
+
+                <div class="product-list honda">
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="product yamaha">
+            <div class="gap-element"></div>
+
+            <div class="product-wrapper wrapper">
+                <div class="section-title-container">
+                    <h1 class="section-title">
+                        <b></b>
+                        <span class="section-title-main">
+                            YAMAHA
+                        </span>
+                        <b></b>
+                    </h1>
+                </div>
+
+                <div class="product-list honda">
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="product suzuki">
+            <div class="gap-element"></div>
+
+            <div class="product-wrapper wrapper">
+                <div class="section-title-container">
+                    <h1 class="section-title">
+                        <b></b>
+                        <span class="section-title-main">
+                            SUZUKI
+                        </span>
+                        <b></b>
+                    </h1>
+                </div>
+
+                <div class="product-list honda">
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="product sym">
+            <div class="gap-element"></div>
+
+            <div class="product-wrapper wrapper">
+                <div class="section-title-container">
+                    <h1 class="section-title">
+                        <b></b>
+                        <span class="section-title-main">
+                            SYM
+                        </span>
+                        <b></b>
+                    </h1>
+                </div>
+
+                <div class="product-list honda">
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="product other">
+            <div class="gap-element"></div>
+
+            <div class="product-wrapper wrapper">
+                <div class="section-title-container">
+                    <h1 class="section-title">
+                        <b></b>
+                        <span class="section-title-main">
+                            XE KHÁC
+                        </span>
+                        <b></b>
+                    </h1>
+                </div>
+
+                <div class="product-list honda">
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="product-item over-hidden flex flex-column flex-align-center">
+                        <div class="item-image">
+                            <a href="#" class="product-link">
+                                <img src="./assets/imgs/item-image/sh160i-trang-den-tieu-chuan.png" alt="" class="item-image-inner hover-zoom-1-2">
+                            </a>
+                        </div>
+
+                        <div class="item-text flex flex-column flex-align-center">
+                            <small class="item-version">
+                                Tiêu chuẩn CBS
+                            </small>
+                            <ul class="item-version-list flex">
+                                <li  class="item-option"><span style="background-color: red;"></span></li>
+                                <li class="item-option"><span style="background-color: white;"></span></li>
+                                <li class="item-option"><span style="background-color: black;"></span></li>
+                                <li class="item-option"><span style="background-color: lightblue;"></span></li>
+                                <li class="item-option"><span style="background-color: yellow;"></span></li>
+                            </ul>
+                            <p class="item-name">
+                                <a href="#">SH160i</a>
+                            </p>
+                            <p class="item-price">
+                                93.000.000₫
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="service-section">
+            <div class="gap-element"></div>
+
+            <div class="service-section-wrraper wrapper">
+
+                <div class="service-wrapper wrapper">
+                    <div class="section-title-container no-padding">
+                        <h1 class="section-title">
+                            <b></b>
+                            <span class="section-title-main">
+                                KHÁM PHÁ DỊCH VỤ TUẤN MẠNH
+                            </span>
+                            <b></b>
+                        </h1>
+                    </div>
+
+                    <div class="service-container grid">
+                        <div class="service-item flex">
+                            <div class="service-image .flex-inline-block">
+                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                            </div>
+                            <div class="service-content .flex-inline-block">
+                                <div class="service-title-container">
+                                    <span class="service-title">chất lượng sản phẩm</span>
+                                </div>
+                                <div class="service-description-container">
+                                    <p class="service-description">
+                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-item flex">
+                            <div class="service-image">
+                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                            </div>
+                            <div class="service-content">
+                                <div class="service-title-container">
+                                    <span class="service-title">chất lượng sản phẩm</span>
+                                </div>
+                                <div class="service-description-container">
+                                    <p class="service-description">
+                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-item flex">
+                            <div class="service-image">
+                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                            </div>
+                            <div class="service-content">
+                                <div class="service-title-container">
+                                    <span class="service-title">chất lượng sản phẩm</span>
+                                </div>
+                                <div class="service-description-container">
+                                    <p class="service-description">
+                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-item flex">
+                            <div class="service-image">
+                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                            </div>
+                            <div class="service-content">
+                                <div class="service-title-container">
+                                    <span class="service-title">chất lượng sản phẩm</span>
+                                </div>
+                                <div class="service-description-container">
+                                    <p class="service-description">
+                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-item flex">
+                            <div class="service-image">
+                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                            </div>
+                            <div class="service-content">
+                                <div class="service-title-container">
+                                    <span class="service-title">chất lượng sản phẩm</span>
+                                </div>
+                                <div class="service-description-container">
+                                    <p class="service-description">
+                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="service-item flex">
+                            <div class="service-image">
+                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                            </div>
+                            <div class="service-content">
+                                <div class="service-title-container">
+                                    <span class="service-title">chất lượng sản phẩm</span>
+                                </div>
+                                <div class="service-description-container">
+                                    <p class="service-description">
+                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer id="footer">
+        <div class="footer-container wrapper flex">
+            <div class="brand-information">
+                <div class="brand-logo-container">
+                    <img src="./assets/imgs/logo/horozontal_logo.png" alt="">
+                </div>
+                <div class="brand-title-container">
+                    <p class="brand-title">
+                        <strong>Hệ thống cửa hàng xe máy Tuấn Mạnh – 16 cửa hàng</strong>
+                    </p>
+                </div>
+                <div class="contact-container">
+                    <div class="phone-container">
+                        <p class="phone">
+                            <span>Hotline: 1900.1967&nbsp; |&nbsp; &nbsp; Cứu hộ: 1900.1967</span>
+                        </p>
+                    </div>
+                    <div class="email-container">
+                        <p class="email">
+                            <span>
+                                Email:
+                                <a href="mailto:cskhhtp02@gmail.com">
+                                    cskhhtp02@gmail.com
+                                </a>
+                            </span>
+                        </p>
+                        <p class="website">
+                            <span>
+                                Website:
+                                <a href="https://xemayhungthinh.vn/">
+                                    xemaytuanmanh.vn
+                                </a>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-store">
+                <div class="brand-store-container">
+                    <div class="system-store-title">
+                        <h3>
+                            <b></b>
+                            <span>Hệ thống cửa hàng xe máy Tuấn Mạnh</span>
+                            <b></b>
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="system-store-container grid">
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p><p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p><p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p><p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p><p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p><p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="{%static "lib/swiper-11.1.1/package/swiper-bundle.min.js" %}"></script>
+
+    <script>
+        const swiper = new Swiper('.swiper', {
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            loop: true,
+
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    </script>
+
+</body>
+</html>
