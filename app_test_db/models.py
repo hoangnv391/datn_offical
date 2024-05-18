@@ -59,6 +59,7 @@ class motorbikes(models.Model):
     brand = models.ForeignKey(brands, on_delete=models.CASCADE, null=True, verbose_name='Thương hiệu')
     image = models.ImageField(upload_to='default_images', null=True)
     banner_image = models.ImageField(upload_to='banner_images', null=True)
+    motor_cost =  models.IntegerField(null=True)
 
     def __str__(self) -> str:
         return f"{self.model}"
@@ -90,7 +91,7 @@ class motorbike_attributes(models.Model):
     value = models.CharField(max_length=50, null=False, verbose_name='Giá trị')
 
     def __str__(self) -> str:
-        return f"{self.value} - {self.attribute_type}"
+        return f"{self.attribute_id} - {self.value} - {self.attribute_type}"
 
     class Meta:
         verbose_name_plural = 'motorbike_attributes'

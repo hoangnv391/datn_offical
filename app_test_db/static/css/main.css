@@ -17,6 +17,10 @@ li {
     list-style: none;
 }
 
+.text-uppercase {
+    text-transform: uppercase;
+}
+
 .flex {
     display: flex;
 }
@@ -100,6 +104,10 @@ li {
     display: flex;
     justify-content: space-between;
 } */
+
+.header-nav-container {
+    background-color: #ef2738;
+}
 
 #wide-nav {
     background-color: #e5091c;
@@ -189,6 +197,10 @@ li {
     padding-bottom: 15px;
 } */
 
+.branch-category {
+    justify-content: space-around;
+}
+
 .branch-category-item {
     width: 20%;
     padding: 0 15px;
@@ -219,13 +231,14 @@ img.hover-zoom-1-2:hover {
     grid-template-columns: auto auto auto auto;
     column-gap: 0px;
     row-gap: 0px;
+    justify-content: start;
 
 }
 
 .product-item {
     margin: 0 15px 25px 15px;
     /* width: 22%; */
-    box-shadow: rgba(100, 100, 100, 0.1) 0px 8px 24px, rgba(100, 100, 100, 0.1) 0px 16px 56px, rgba(100, 100, 100, 0.1) 0px 24px 80px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 24px, rgba(0, 0, 0, 0.1) 0px 16px 56px, rgba(0, 0, 0, 0.1) 0px 24px 80px;
     /* over */
     /* flex-basis: 25%; */
     display: inline-block;
@@ -233,7 +246,7 @@ img.hover-zoom-1-2:hover {
 }
 
 .item-image {
-    min-height: 210px;
+    height: 210px;
 }
 
 .product-item .item-image-inner {
@@ -311,7 +324,7 @@ img.hover-zoom-1-2:hover {
 .item-price {
     font-family: 'Hyundai Sans Head Office';
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .service-section {
@@ -337,6 +350,7 @@ img.hover-zoom-1-2:hover {
 }
 .service-container {
     grid-template-columns: auto auto auto;
+    justify-content: space-between;
 }
 
 .service-item {
@@ -368,6 +382,8 @@ img.hover-zoom-1-2:hover {
 .service-title {
     text-transform: uppercase;
     font-family: 'Raleway Bold';
+    font-size: 20px;
+    color: #002c5f;
 }
 
 .service-description-container {
@@ -376,7 +392,7 @@ img.hover-zoom-1-2:hover {
 
 .service-description {
     font-family: 'Raleway Semibold';
-    font-size: 14px;
+    font-size: 15px;
     word-spacing: 4px;
 }
 
@@ -439,4 +455,12 @@ img.hover-zoom-1-2:hover {
     font-size: 14px;
     padding-bottom: 12px;
     cursor: pointer;
+}
+
+.store i {
+    padding-right: 5px;
+}
+
+.footer-container {
+    justify-content: space-between;
 }

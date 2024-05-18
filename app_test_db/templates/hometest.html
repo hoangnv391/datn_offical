@@ -32,7 +32,11 @@
 
             </div>
 
-            <div id="wide-nav">
+
+
+        </div>
+        <div class="header-nav-container">
+            <div id="wide-nav" class="wrapper">
                 <ul id="header-nav">
                     <li class="header-nav-item"><a href="#">Trang chủ</a></li>
                     <li class="header-nav-item"><a href="#">Hãng xe</a></li>
@@ -42,7 +46,6 @@
                     <li class="header-nav-item"><a href="#">Đăng nhập</a></li>
                 </ul>
             </div>
-
         </div>
     </header>
 
@@ -85,7 +88,7 @@
                     <h1 class="section-title">
                         <b></b>
                         <span class="section-title-main">
-                            KHÁM PHÁ DÒNG XE
+                            KHÁM PHÁ HÃNG XE
                         </span>
                         <b></b>
                     </h1>
@@ -107,7 +110,7 @@
                 <div class="section-title-container">
                     <h1 class="section-title">
                         <b></b>
-                        <span class="section-title-main">
+                        <span class="section-title-main text-uppercase">
                             {{ brand.brand_name }}
                         </span>
                         <b></b>
@@ -128,21 +131,31 @@
                                 </div>
 
                                 <div class="item-text flex flex-column flex-align-center">
+                                    {% for sku in skus %}
+                                        {% if sku.motorbike == motor %}
+
+                                        {% endif %}
+                                    {% endfor %}
                                     <small class="item-version">
-                                        Tiêu chuẩn CBS
+                                        {% for default_sku in default_option %}
+                                            {% if default_sku.motorbike == motor %}
+                                            {{default_sku.option.value}}
+                                            {% endif %}
+                                        {% endfor %}
                                     </small>
+
                                     <ul class="item-version-list flex">
-                                        <li  class="item-option"><span style="background-color: red;"></span></li>
-                                        <li class="item-option"><span style="background-color: white;"></span></li>
-                                        <li class="item-option"><span style="background-color: black;"></span></li>
-                                        <li class="item-option"><span style="background-color: lightblue;"></span></li>
-                                        <li class="item-option"><span style="background-color: yellow;"></span></li>
+                                        {% for sku in skus %}
+                                            {% if sku.motorbike == motor %}
+                                                <li class="item-option"><span style="background-color: {{ sku.color.color_1 }};" class="{{sku.id}}"></span></li>
+                                            {% endif %}
+                                        {% endfor %}
                                     </ul>
                                     <p class="item-name">
                                         <a href="#">{{motor.model}}</a>
                                     </p>
                                     <p class="item-price">
-                                        93.000.000₫
+                                        {{ motor.motor_cost }}₫
                                     </p>
                                 </div>
                             </div>
@@ -180,7 +193,7 @@
                     <div class="service-container grid">
                         <div class="service-item flex">
                             <div class="service-image .flex-inline-block">
-                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                                <img src="{% static "imgs/services/baohiem.jpg" %}" alt="">
                             </div>
                             <div class="service-content .flex-inline-block">
                                 <div class="service-title-container">
@@ -196,15 +209,15 @@
 
                         <div class="service-item flex">
                             <div class="service-image">
-                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                                <img src="{% static "imgs/services/baohiem.jpg" %}" alt="">
                             </div>
                             <div class="service-content">
                                 <div class="service-title-container">
-                                    <span class="service-title">chất lượng sản phẩm</span>
+                                    <span class="service-title">dịch vụ khách hàng</span>
                                 </div>
                                 <div class="service-description-container">
                                     <p class="service-description">
-                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                        Đội ngũ nhân viên tư vấn, bán hàng và kỹ thuật của Hưng Thịnh luôn nhiệt tình mang đến sự hài lòng và tin tưởng cho khách hàng.
                                     </p>
                                 </div>
                             </div>
@@ -212,15 +225,15 @@
 
                         <div class="service-item flex">
                             <div class="service-image">
-                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                                <img src="{% static "imgs/services/phutung.jpg" %}" alt="">
                             </div>
                             <div class="service-content">
                                 <div class="service-title-container">
-                                    <span class="service-title">chất lượng sản phẩm</span>
+                                    <span class="service-title">phụ tùng & phụ kiện</span>
                                 </div>
                                 <div class="service-description-container">
                                     <p class="service-description">
-                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                        Phụ tùng và phụ kiện chính hãng. Luôn đảm bảo chất lượng sản phẩm.
                                     </p>
                                 </div>
                             </div>
@@ -228,15 +241,15 @@
 
                         <div class="service-item flex">
                             <div class="service-image">
-                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                                <img src="{% static "imgs/services/dichvu.jpg" %}" alt="">
                             </div>
                             <div class="service-content">
                                 <div class="service-title-container">
-                                    <span class="service-title">chất lượng sản phẩm</span>
+                                    <span class="service-title">dịch vụ bảo hành và bảo dưỡng</span>
                                 </div>
                                 <div class="service-description-container">
                                     <p class="service-description">
-                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                        Chương trình bảo hành, bảo dưỡng chuyên nghiệp
                                     </p>
                                 </div>
                             </div>
@@ -244,15 +257,15 @@
 
                         <div class="service-item flex">
                             <div class="service-image">
-                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                                <img src="{% static "imgs/services/phutung.jpg" %}" alt="">
                             </div>
                             <div class="service-content">
                                 <div class="service-title-container">
-                                    <span class="service-title">chất lượng sản phẩm</span>
+                                    <span class="service-title">cứu hộ miễn phí trong 1 năm</span>
                                 </div>
                                 <div class="service-description-container">
                                     <p class="service-description">
-                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                        An tâm khi di chuyển với Hotline cứu hộ 1900.1xxx
                                     </p>
                                 </div>
                             </div>
@@ -260,15 +273,15 @@
 
                         <div class="service-item flex">
                             <div class="service-image">
-                                <img src="./assets/imgs/services/baohiem.jpg" alt="">
+                                <img src="{% static "imgs/services/baohiem.jpg" %}" alt="">
                             </div>
                             <div class="service-content">
                                 <div class="service-title-container">
-                                    <span class="service-title">chất lượng sản phẩm</span>
+                                    <span class="service-title">hỗ trợ mất cắp</span>
                                 </div>
                                 <div class="service-description-container">
                                     <p class="service-description">
-                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                        Hỗ trợ khách hàng 50% giá trị xe (không quá 25.000.000 vnd) nếu khách hàng mất xe trong năm đầu tiên
                                     </p>
                                 </div>
                             </div>
@@ -285,7 +298,7 @@
         <div class="footer-container wrapper flex">
             <div class="brand-information">
                 <div class="brand-logo-container">
-                    <img src="./assets/imgs/logo/horozontal_logo.png" alt="">
+                    <img src="{% static "imgs/logo/horozontal_logo.png" %}" alt="">
                 </div>
                 <div class="brand-title-container">
                     <p class="brand-title">
@@ -295,7 +308,7 @@
                 <div class="contact-container">
                     <div class="phone-container">
                         <p class="phone">
-                            <span>Hotline: 1900.1967&nbsp; |&nbsp; &nbsp; Cứu hộ: 1900.1967</span>
+                            <span>Hotline: 1900.1xxx&nbsp; |&nbsp; &nbsp; Cứu hộ: 1900.1xxx</span>
                         </p>
                     </div>
                     <div class="email-container">
@@ -334,77 +347,72 @@
                 <div class="system-store-container grid">
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Lý Bôn  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Vũ Thư 1  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Kiến Xương 2  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Tiền Hải  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Minh Khai 1  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Minh Khai 2  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Vũ Thư 2  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Quang Trung 1  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Quang Trung 2  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Trần Thái Tông  </span>
                         </a>
                     </p>
                     <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Gia Lễ  </span>
                         </a>
-                    </p><p class="store">
+                    </p>
+                    <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Đông Hưng  </span>
                         </a>
-                    </p><p class="store">
+                    </p>
+                    <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Quỳnh Côi </span>
                         </a>
-                    </p><p class="store">
+                    </p>
+                    <p class="store">
                         <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
-                        </a>
-                    </p><p class="store">
-                        <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
-                        </a>
-                    </p><p class="store">
-                        <a>
-                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Hưng Thịnh HEAD Lý Bôn  </span>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Quang Bình  </span>
                         </a>
                     </p>
                 </div>
@@ -432,6 +440,23 @@
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+        });
+    </script>
+
+    <script>
+        function formatCurrency(value) {
+            // Loại bỏ ký tự đồng Việt Nam (₫) và chuyển đổi chuỗi thành số
+            value = parseInt(value.replace(/₫/g, ''));
+            // Định dạng số tiền và thêm ký tự đồng Việt Nam (₫) vào cuối
+            return value.toLocaleString('vi-VN') + '₫';
+        }
+
+        // Lấy tất cả các thẻ p có class là "item-price"
+        const priceElements = document.querySelectorAll('.item-price');
+
+        // Lặp qua từng thẻ p và cập nhật nội dung
+        priceElements.forEach(function(element) {
+            element.textContent = formatCurrency(element.textContent);
         });
     </script>
 

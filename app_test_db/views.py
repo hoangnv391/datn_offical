@@ -62,14 +62,62 @@ def signup(request):
 
 def home(request):
     motor_brands = brands.objects.all().order_by('brand_order')
-    motorbike_list = motorbikes.objects.all()
+    motorbike_list = motorbikes.objects.all().order_by('motorbike_id')
+    home_skus = []
+    default_skus = []
+    count = 0
 
-    print(motorbike_list)
+    # print(motorbike_list)
+    for motor in motorbike_list:
+        skus = motorbike_skus.objects.filter(motorbike = motor).order_by('price')
+        default_skus.append(skus[0])
+        internal_count = 0
+        just_color = True
+
+        results = (skus.values('option').order_by())
+
+        unique_set = set(tuple(d.items()) for d in results)
+
+        unique_dict = [dict(item) for item in unique_set]
+
+        if ((len(unique_dict) > 1)):
+            for sku in skus:
+                if count == 0:
+                    home_skus.append(sku)
+                    count = count + 1
+                else:
+                    if (sku.motorbike != home_skus[count-1].motorbike):
+                        home_skus.append(sku)
+                        count = count + 1
+                    else:
+                        if (sku.option != (home_skus[count - 1].option) ):
+                            if ((sku.color) != (home_skus[count - 1].color)):
+                                home_skus.append(sku)
+                                count = count + 1
+
+
+    for motor in motorbike_list:
+        skus = motorbike_skus.objects.filter(motorbike = motor).order_by('option')
+        internal_count = 0
+        just_color = True
+
+        results = (skus.values('option').order_by())
+
+        unique_set = set(tuple(d.items()) for d in results)
+
+        unique_dict = [dict(item) for item in unique_set]
+
+        if ((len(unique_dict) == 1)):
+            for item in skus:
+                home_skus.append(item)
+
+
 
     return render(request, "hometest.html", {
         'brands': motor_brands,
         'motorbikes': motorbike_list,
-
+        'skus': home_skus,
+        'default_option': default_skus,
     })
 
 

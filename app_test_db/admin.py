@@ -67,6 +67,7 @@ class DefaultImageAdmin(admin.ModelAdmin):
             return format_html('<img src="" style="max-height:200px"/>')
 
     list_display = ['model', 'image_tag', 'banner_image_tag']
+    list_filter = ["brand"]
 
 class SkuImageAdmin(admin.ModelAdmin):
     def image_tag(self, obj):
@@ -75,7 +76,7 @@ class SkuImageAdmin(admin.ModelAdmin):
         except:
             return format_html('<img src="" style="max-width:200px; max-height:200px"/>')
 
-    list_display = ['motorbike', 'color', 'option', 'price', 'image_tag', ]
+    list_display = ['sku_id', 'motorbike', 'color', 'option', 'price', 'image_tag', ]
 
 class LibraryImageAdmin(admin.ModelAdmin):
     def image_tag(self, obj):
