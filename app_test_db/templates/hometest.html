@@ -147,7 +147,7 @@
                                     <ul class="item-version-list flex">
                                         {% for sku in skus %}
                                             {% if sku.motorbike == motor %}
-                                                <li class="item-option"><span style="background-color: {{ sku.color.color_1 }};" class="{{sku.id}}"></span></li>
+                                                <li class="item-option" data-src="{{sku.sku_image.url}}" data-option="{{sku.option.value}}" data-price="{{sku.price}}" ><span style="background-color: {{ sku.color.color_1 }};" class="{{sku.sku_id}}"></span></li>
                                             {% endif %}
                                         {% endfor %}
                                     </ul>
@@ -201,7 +201,7 @@
                                 </div>
                                 <div class="service-description-container">
                                     <p class="service-description">
-                                        Hưng Thịnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
+                                        Tuấn Mạnh là đại lý chính thức của các hãng xe máy nổi tiếng như Honda, Yamaha, Suzuki, SYM,...với nhiều mẫu mã, dòng xe phong phú
                                     </p>
                                 </div>
                             </div>
@@ -217,7 +217,7 @@
                                 </div>
                                 <div class="service-description-container">
                                     <p class="service-description">
-                                        Đội ngũ nhân viên tư vấn, bán hàng và kỹ thuật của Hưng Thịnh luôn nhiệt tình mang đến sự hài lòng và tin tưởng cho khách hàng.
+                                        Đội ngũ nhân viên tư vấn, bán hàng và kỹ thuật của Tuấn Mạnh luôn nhiệt tình mang đến sự hài lòng và tin tưởng cho khách hàng.
                                     </p>
                                 </div>
                             </div>
@@ -421,44 +421,9 @@
 
     </footer>
 
-    <script src="{%static "lib/swiper-11.1.1/package/swiper-bundle.min.js" %}"></script>
-
-    <script>
-        const swiper = new Swiper('.swiper', {
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            loop: true,
-
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-    </script>
-
-    <script>
-        function formatCurrency(value) {
-            // Loại bỏ ký tự đồng Việt Nam (₫) và chuyển đổi chuỗi thành số
-            value = parseInt(value.replace(/₫/g, ''));
-            // Định dạng số tiền và thêm ký tự đồng Việt Nam (₫) vào cuối
-            return value.toLocaleString('vi-VN') + '₫';
-        }
-
-        // Lấy tất cả các thẻ p có class là "item-price"
-        const priceElements = document.querySelectorAll('.item-price');
-
-        // Lặp qua từng thẻ p và cập nhật nội dung
-        priceElements.forEach(function(element) {
-            element.textContent = formatCurrency(element.textContent);
-        });
-    </script>
+    <script src="{% static "lib/swiper-11.1.1/package/swiper-bundle.min.js" %}"></script>
+    <script src="{% static "scripts/main.js" %}"></script>
+    <script src="{% static "scripts/swiper_slider.js" %}"></script>
 
 </body>
 </html>
