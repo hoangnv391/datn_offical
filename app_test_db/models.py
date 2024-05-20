@@ -3,6 +3,7 @@ from datetime import datetime
 from django.core.validators import MinValueValidator, MaxValueValidator
 # from django.utils.html import ma
 from django.utils.html import escape
+from django.utils.text import slugify
 
 # def year_choices():
 #     return [(r,r) for r in range(1984, datetime.today().year+1)]
@@ -60,6 +61,9 @@ class motorbikes(models.Model):
     image = models.ImageField(upload_to='default_images', null=True)
     banner_image = models.ImageField(upload_to='banner_images', null=True)
     motor_cost =  models.IntegerField(null=True)
+    model_slug = models.SlugField(default="", null=True, blank=True, db_index=True,
+                                #   editable=False
+                                  )
 
     def __str__(self) -> str:
         return f"{self.model}"
@@ -67,6 +71,10 @@ class motorbikes(models.Model):
     class Meta:
         verbose_name_plural = 'motorbikes'
         db_table = 'motorbikes'
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.model)
+        super().save(*args, **kwargs)
 
 # 4th table: motorbike_attributes
 class motorbike_attributes(models.Model):

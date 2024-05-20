@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from .forms import UserForm
 from .models import users, brands, motorbikes, motorbike_skus
+from django.http import HttpResponse
+
 
 # Create your views here.
 def login(request):
@@ -97,6 +100,7 @@ def home(request):
 
 
     for motor in motorbike_list:
+        # motor.save()
         skus = motorbike_skus.objects.filter(motorbike = motor).order_by('option')
         internal_count = 0
         just_color = True
@@ -113,11 +117,34 @@ def home(request):
 
 
 
-    return render(request, "hometest.html", {
+    return render(request, "home.html", {
         'brands': motor_brands,
         'motorbikes': motorbike_list,
         'skus': home_skus,
         'default_option': default_skus,
     })
 
+def motor_detail(request, slug):
+    motor = motorbikes.objects.get(model_slug = slug)
+    motor_skus = motorbike_skus.objects.filter(motorbike = motor).order_by('price')
+
+    option = []
+
+    for sku in motor_skus:
+        option.append(sku.option)
+        if sku.color.color_3:
+            pass
+        else:
+            print("-",sku.color.color_3,"-")
+
+    option = list(set(option))
+
+    print(option)
+
+    # return HttpResponse("<h1>{model}</h1>".format(model = motorbike.model))
+    return render(request, "product.html", {
+        'motorbike': motor,
+        'options': option,
+        'skus': motor_skus,
+    })
 

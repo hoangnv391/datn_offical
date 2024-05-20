@@ -14,7 +14,6 @@ priceElements.forEach(function(element) {
 });
 
 const imageItems = document.querySelectorAll('.item-option');
-const displayImages = document.querySelectorAll('.item-image img');
 
 imageItems.forEach((item, index) => {
     item.addEventListener('click', () => {
@@ -32,5 +31,37 @@ imageItems.forEach((item, index) => {
     });
 });
 
+// Start: js code for product site
+const allColorItem = document.querySelectorAll('.color-item');
+const productImage = document.querySelector('.product-image').querySelector('img');
+const productPrice = document.querySelector('.price-value');
+
+productPrice.textContent = formatCurrency(productPrice.textContent);
+
+function changeBorder(element) {
+    allColorItem.forEach(function(item) {
+        item.style.border = '2px solid white';
+    });
+    element.style.border = '2px solid #002c5f';
+
+    const imgPath = element.getAttribute('data-src');
+    const itemPrice = element.getAttribute('data-price');
+
+    productImage.src = imgPath;
+    productPrice.textContent = formatCurrency(itemPrice);
 
 
+
+}
+
+/* Start: function to change when click an option */
+// const productSkus = document.querySelectorAll('.color-item');
+// const productImage = document.querySelector('.product-image').querySelector('img');
+
+// productSkus.forEach((item,) => {
+//    item.addEventListener(clic)
+// });
+
+/* End: function to change when click an option */
+
+// End: js code for product site

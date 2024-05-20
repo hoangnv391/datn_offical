@@ -463,3 +463,234 @@ img.hover-zoom-1-2:hover {
 .footer-container {
     justify-content: space-between;
 }
+
+/* Start: CSS for product site */
+
+.banner-container img {
+    max-width: 100%;
+}
+
+.product-image {
+    width: 50%;
+}
+
+.product-image img {
+    max-width: 100%;
+}
+
+.product-option {
+    width: 50%;
+}
+
+.product-option .product-name {
+    color: #002c5f;
+    margin-top: 6.4px;
+}
+
+.product-option .product-name h1{
+    font-family: 'Hyundai Sans Head Office';
+    font-size: 32px;
+    line-height: 100%;
+}
+
+.product-option .color-group {
+    padding-top: 30px;
+
+}
+
+.product-option .color-group p {
+    font-family: 'Raleway Bold';
+    font-size: 18px;
+    color: #515151;
+}
+
+.color-item-container {
+    grid-template-columns: auto auto;
+    /* justify-content: start; */
+}
+
+.color-item {
+    transform: skewX(-30deg);
+    border: 2px solid white;
+    width: 70px;
+}
+
+.color-item-container .color-item .color-cell {
+    height: 25px;
+    border: 2px solid #ebebeb;
+    flex-grow: 1;
+}
+
+.color-container {
+    margin-top: 20px;
+}
+.color-container .color-item  {
+    margin: 0 10px;
+}
+
+.color-item-container .color-container p{
+    line-height: 25px;
+    font-family: 'Raleway Semibold';
+    color: #515151;
+    margin-left: 8px;
+    font-size: 16px;
+}
+
+.color-item {
+    cursor: pointer;
+}
+
+/* Start: css for price section */
+
+.main-product-container .product-detail-price {
+    padding: 12px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    background-color: #f3f3f3;
+    border-left: 2px solid black;
+}
+
+.main-product-container .price-label {
+    font-family: 'Raleway Semibold';
+    font-size: 16px;
+    color: #002c5f;
+}
+
+.main-product-container .price-value {
+    font-family: Helvetica, sans-serif;
+    font-size: 24px;
+    color: #cc0000;
+    font-weight: bold;
+    padding-left: 14px;
+}
+
+.add-to-cart-btn {
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Raleway Bold';
+    text-transform: uppercase;
+    font-size: 18px;
+    background-color: #cc0000;
+    line-height: 60px;
+    color: white;
+    border-radius: 12px 12px 12px 12px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    margin-top: 30px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #ff0000;
+}
+
+/* End: css for price section */
+
+
+/* Start: css for product information */
+
+.product-info-container {
+    padding-top: 80px;
+    margin-bottom: 50px;
+}
+
+.product-feature {
+    width: 60%;
+    padding: 20px 20px 10px;
+    background-color: #f1f1f1;
+    border-top: 2px solid #002c5f;
+    margin-right: 15px;
+}
+
+.product-spec {
+    width: 40%;
+}
+
+.product-feature .feature-banner {
+    height: 56px;
+    background-color: #002c5f;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    padding-left: 15px;
+}
+
+.product-feature .feature-banner p {
+    line-height: 56px;
+    color: white;
+    font-family: 'Raleway Semibold';
+}
+
+.product-info-container .feature-image-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 20px;
+    justify-content: start;
+    padding-bottom: 25px;
+}
+
+/* .product-info-container .feature-image-container .image-container {
+    padding: 0 15px;
+} */
+
+.product-info-container .feature-image-container .image-container img {
+    max-width: 100%;
+}
+
+.product-info-container .feature-image-container .image-container p.feature-detail {
+    font-family: 'Raleway Semibold';
+    font-size: 14px;
+}
+
+.product-spec .product-spec-header {
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -17px;
+    margin-bottom: 30px;
+}
+
+.product-spec .product-spec-header b {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #002c5f;
+    opacity: .1;
+}
+
+.product-spec .product-spec-header h2 {
+    margin: 0px 15px;
+    color: #002c5f;
+    font-family: 'Raleway Bold';
+    font-size: 32px;
+    text-transform: uppercase;
+}
+
+.product-spec .spec-table {
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.product-spec .spec-table table {
+    width: 100%;
+}
+
+.product-spec .spec-table table, th, td {
+    border: 1px solid;
+
+}
+
+.product-spec .spec-table table {
+    color: #515151;
+    border-collapse: collapse;
+    line-height: 19px;
+}
+
+.product-spec .spec-table td {
+    padding: 8px;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* End: css for product information */
+
+/* End: CSS for product site */

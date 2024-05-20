@@ -51,126 +51,303 @@
 
     <main id="main">
 
-        <!-- Start: Slider section -->
-        <div class="slider">
-                <!-- Slider main container -->
-            <div class="swiper">
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                <!-- Slides -->
-                    <div class="swiper-slide"><img src="{% static "imgs/slider/winner-cbr.png" %}" alt=""></div>
-                    <div class="swiper-slide"><img src="{% static "imgs/slider/air-blade.jpg" %}" alt=""></div>
-                    <div class="swiper-slide"><img src="{% static "imgs/slider/vario.jpg" %}" alt=""></div>
-                    <div class="swiper-slide"><img src="{% static "imgs/slider/sh.jpg" %}" alt=""></div>
-                    <div class="swiper-slide"><img src="{% static "imgs/slider/lead.jpg" %}" alt=""></div>
-                    <div class="swiper-slide"><img src="{% static "imgs/slider/cbr.jpg" %}" alt=""></div>
-                    <div class="swiper-slide"><img src="{% static "imgs/slider/blade.jpg" %}" alt=""></div>
+        <!-- Start: Banner image section -->
+        <div class="banner-container">
+            <img src="{{motorbike.banner_image.url}}" style="width: 100%;" class="banner-img">
+        </div>
+        <!-- End: Banner image section -->
 
-                </div>
+        <div class="gap-element"></div>
 
-                <!-- If we need pagination -->
-                <div class="swiper-pagination"></div>
-
-                <!-- If we need navigation buttons -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-
+        <!-- Start: Main product session -->
+        <div class="main-product-container wrapper flex">
+            <div class="product-image">
+                <img src="{{motorbike.image.url}}" alt="product image">
             </div>
 
-        </div>
-        <!-- End: Slider section -->
-
-        <!-- Start: Branch banner section -->
-        <div class="branch-banner">
-            <div class="gap-element"></div>
-            <div class="branch-banner-wrapper wrapper">
-                <div class="section-title-container">
-                    <h1 class="section-title">
-                        <b></b>
-                        <span class="section-title-main">
-                            KHÁM PHÁ HÃNG XE
-                        </span>
-                        <b></b>
-                    </h1>
-                </div>
-                <div class="branch-category flex">
-                {% for brand in brands %}
-                    <li class="branch-category-item"><a href="#"><img class="hover-zoom-1-2" src="{{ brand.brand_image.url }}" alt="honda-logo"></a></li>
-                {% endfor %}
-                </div>
-            </div>
-        </div>
-        <!-- End: Branch banner section -->
-
-
-        {% for brand in brands %}
-        <div class="product {{ brand.brand_name }}">
-            <div class="gap-element"></div>
-            <div class="product-wrapper wrapper">
-                <div class="section-title-container">
-                    <h1 class="section-title">
-                        <b></b>
-                        <span class="section-title-main text-uppercase">
-                            {{ brand.brand_name }}
-                        </span>
-                        <b></b>
-                    </h1>
+            <div class="product-option">
+                <div class="gap-element"></div>
+                <div class="product-name">
+                    <h1>{{motorbike.model}}</h1>
                 </div>
 
-                <div class="product-list {{ brand.brand_name }}">
+                {% for option in options %}
+                <div class="option-container">
+                    <div class="color-group">
+                        <p>{{ option.value }}</p>
+                    </div>
 
+                    <div class="color-item-container grid">
+                    {% for sku in skus %}
+                        {% if sku.option == option %}
+                        <div class="color-container flex">
+                            <div class="color-item flex" onclick="changeBorder(this)" data-src="{{sku.sku_image.url}}" data-price="{{sku.price}}">
+                                {% if sku.color.color_1 %}
+                                <div class="color-cell" style="background-color: {{sku.color.color_1}};"></div>
+                                {% endif %}
 
-                    {% for motor in motorbikes %}
+                                {% if sku.color.color_2 %}
+                                <div class="color-cell" style="background-color: {{sku.color.color_2}};"></div>
+                                {% endif %}
 
-                        {% if motor.brand.brand_name == brand.brand_name %}
-                            <div class="product-item over-hidden flex flex-column flex-align-center">
-                                <div class="item-image">
-                                    <a href="{% url "motor-detail-page" motor.model_slug %}" class="product-link">
-                                        <img src="{{motor.image.url}}" alt="" class="item-image-inner hover-zoom-1-2">
-                                    </a>
-                                </div>
-
-                                <div class="item-text flex flex-column flex-align-center">
-                                    {% for sku in skus %}
-                                        {% if sku.motorbike == motor %}
-
-                                        {% endif %}
-                                    {% endfor %}
-                                    <small class="item-version">
-                                        {% for default_sku in default_option %}
-                                            {% if default_sku.motorbike == motor %}
-                                            {{default_sku.option.value}}
-                                            {% endif %}
-                                        {% endfor %}
-                                    </small>
-
-                                    <ul class="item-version-list flex">
-                                        {% for sku in skus %}
-                                            {% if sku.motorbike == motor %}
-                                                <li class="item-option" data-src="{{sku.sku_image.url}}" data-option="{{sku.option.value}}" data-price="{{sku.price}}" ><span style="background-color: {{ sku.color.color_1 }};" class="{{sku.sku_id}}"></span></li>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </ul>
-                                    <p class="item-name">
-                                        <a href="#">{{motor.model}}</a>
-                                    </p>
-                                    <p class="item-price">
-                                        {{ motor.motor_cost }}₫
-                                    </p>
-                                </div>
+                                {% if sku.color.color_3 %}
+                                <div class="color-cell" style="background-color: {{sku.color.color_3}};"></div>
+                                {% endif %}
                             </div>
+                            <p class="color-label">{{sku.color.value}}</p>
+                        </div>
                         {% endif %}
-
-
-
-
                     {% endfor %}
-
-
+                    </div>
                 </div>
+                {% endfor %}
+
+                <div class="product-detail-price">
+                    <div class="price-item">
+                        <span class="price-label">Giá bán: </span>
+                        <span class="price-value">{{motorbike.motor_cost}}</span>
+                    </div>
+                </div>
+
+                <div class="add-to-cart-btn">
+                        <span class="add-to-cart">Thêm vào giỏ hàng</span>
+                </div>
+
             </div>
         </div>
-        {% endfor %}
+        <!-- End: Main product session -->
+
+        <!-- Start: product infomation section -->
+
+        <div class="product-info-container wrapper flex">
+
+            <!-- Start: product feature section -->
+
+            <div class="product-feature">
+
+                <div class="product-design">
+                    <div class="feature-banner">
+                        <p>thiết kế</p>
+                    </div>
+
+                    <div class="feature-image-container">
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="product-engine">
+                    <div class="feature-banner">
+                        <p>động cơ - công nghệ</p>
+                    </div>
+
+                    <div class="feature-image-container">
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="product-safety">
+                    <div class="feature-banner">
+                        <p>tiện ích - an toàn</p>
+                    </div>
+
+                    <div class="feature-image-container">
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+
+                        <div class="image-container">
+                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
+                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- End: product feature section -->
+
+            <!-- Star: product spec section -->
+
+            <div class="product-spec">
+                <div class="product-spec-header flex">
+                    <b></b>
+                    <h2>thông số xe</h2>
+                    <b></b>
+                </div>
+
+                <div class="spec-table">
+                    <table>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Khối lượng bản thân</td>
+                            <td>
+                                SH160i CBS: 133kg
+                                <br>
+                                SH160i ABS: 134kg
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- End: product spec section -->
+
+        </div>
+
+        <!-- End: product infomation section -->
+
 
 
 
@@ -422,8 +599,9 @@
     </footer>
 
     <script src="{% static "lib/swiper-11.1.1/package/swiper-bundle.min.js" %}"></script>
-    <script src="{% static "scripts/main.js" %}"></script>
     <script src="{% static "scripts/swiper_slider.js" %}"></script>
+    <script src="{% static "scripts/main.js" %}"></script>
+
 
 </body>
 </html>
