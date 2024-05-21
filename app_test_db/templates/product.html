@@ -131,26 +131,14 @@
                     </div>
 
                     <div class="feature-image-container">
+                    {% for feature in motor_features %}
+                        {% if feature.feature.feature_type == "design" %}
                         <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
+                            <img src="{{feature.image.url}}" alt="" class="feature-image">
+                            <p class="feature-detail">{{feature.description}}</p>
                         </div>
-
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
+                        {% endif %}
+                    {% endfor %}
                     </div>
                 </div>
 
@@ -160,26 +148,14 @@
                     </div>
 
                     <div class="feature-image-container">
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
+                        {% for feature in motor_features %}
+                            {% if feature.feature.feature_type == "engine_technology" %}
+                            <div class="image-container">
+                                <img src="{{feature.image.url}}" alt="" class="feature-image">
+                                <p class="feature-detail">{{feature.description}}</p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -189,25 +165,14 @@
                     </div>
 
                     <div class="feature-image-container">
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
-
-                        <div class="image-container">
-                            <img src="./assets/imgs/features/dien-mao-SH-scaled.jpeg" alt="" class="feature-image">
-                            <p class="feature-detail">Diện mạo mới sang trọng và thời thượng</p>
-                        </div>
+                        {% for feature in motor_features %}
+                            {% if feature.feature.feature_type == "utilities_safety" %}
+                            <div class="image-container">
+                                <img src="{{feature.image.url}}" alt="" class="feature-image">
+                                <p class="feature-detail">{{feature.description}}</p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
 

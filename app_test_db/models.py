@@ -330,9 +330,10 @@ class motorbike_specs(models.Model):
 class motorbike_features(models.Model):
     feature_id = models.AutoField(primary_key=True)
     feature_type = models.CharField(max_length = 100, verbose_name='Kiểu tính năng')
+    feature_description = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self) -> str:
-        return f"{self.feature_type}"
+        return f"{self.feature_type} - {self.feature_description}"
 
     class Meta:
         verbose_name_plural = 'motorbike_features'

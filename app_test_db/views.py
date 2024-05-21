@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from .forms import UserForm
-from .models import users, brands, motorbikes, motorbike_skus
+from .models import users, brands, motorbikes, motorbike_skus, motorbike_feature_images
 from django.http import HttpResponse
 
 
@@ -132,19 +132,28 @@ def motor_detail(request, slug):
 
     for sku in motor_skus:
         option.append(sku.option)
-        if sku.color.color_3:
-            pass
-        else:
-            print("-",sku.color.color_3,"-")
 
     option = list(set(option))
 
-    print(option)
+    motor_features = motorbike_feature_images.objects.filter(motorbike = motor).order_by('image_id')
 
-    # return HttpResponse("<h1>{model}</h1>".format(model = motorbike.model))
+    # fields = [field.value for field in motor_features[0]._meta.get_fields()]
+
+    field_names = [field.name for field in (motor_features[0])._meta.get_fields()]
+
+    for field in field_names:
+    #     print(getattr( motor_features[0], field))
+        print(getattr( (motor_features[0]), field), " ")
+
+    # print(fields)
+
+    # for field in fields:
+    #     print(getattr( motor_features[0], field))
+
     return render(request, "product.html", {
         'motorbike': motor,
         'options': option,
         'skus': motor_skus,
+        'motor_features': motor_features,
     })
 

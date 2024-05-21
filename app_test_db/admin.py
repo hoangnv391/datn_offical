@@ -97,6 +97,17 @@ class MotobikeFeatureImageAdmin(admin.ModelAdmin):
     list_display = ['motorbike', 'feature', 'image_tag', 'description']
 
 
+class MotorbikeFeatureDetailImageAdmin(admin.ModelAdmin):
+    def image_tag(self, obj):
+        try:
+            return format_html('<img src="{}" style="max-width:200px; max-height:200px"/>'.format(obj.image.url))
+        except:
+            return format_html('<img src="" style="max-width:200px; max-height:200px"/>')
+
+    list_display = ['feature', 'motorbike', 'description', 'image_tag', ]
+    list_filter = ['motorbike', 'feature']
+    ordering = ['image_id']
+
 class MotobikeAttributeAdmin(admin.ModelAdmin):
     list_filter = ["attribute_type"]
 
@@ -119,5 +130,5 @@ admin.site.register(payment_details)
 admin.site.register(library_images, LibraryImageAdmin)
 admin.site.register(motorbike_specs)
 admin.site.register(motorbike_features)
-admin.site.register(motorbike_feature_images, MotobikeFeatureImageAdmin)
+admin.site.register(motorbike_feature_images, MotorbikeFeatureDetailImageAdmin)
 
