@@ -43,7 +43,11 @@
                     <li class="header-nav-item"><a href="#">Dòng xe</a></li>
                     <li class="header-nav-item header-search"><a href="#">Tìm kiếm</a></li>
                     <li class="header-nav-item"><a href="#">Giỏ hàng</a></li>
-                    <li class="header-nav-item"><a href="#">Đăng nhập</a></li>
+                    {% if user != None %}
+                    <li class="header-nav-item"><a href="{% url "logout" %}">Đăng xuất</a></li>
+                    {% else %}
+                    <li class="header-nav-item"><a href="{% url "login" %}">Đăng nhập</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

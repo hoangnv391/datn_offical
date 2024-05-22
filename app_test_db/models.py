@@ -189,16 +189,16 @@ class users(models.Model):
         db_table = 'users'
 
 # 7th table: carts
-class carts(models.Model):
-    cart_id = models.AutoField(primary_key=True)
-    total = models.IntegerField(null=True, verbose_name='Tổng số lượng xe')
-    user = models.ForeignKey(users, on_delete=models.CASCADE, null=True, verbose_name='Người mua')
+# class carts(models.Model):
+#     cart_id = models.AutoField(primary_key=True)
+#     total = models.IntegerField(null=True, verbose_name='Tổng số lượng xe')
+#     user = models.ForeignKey(users, on_delete=models.CASCADE, null=True, verbose_name='Người mua')
 
-    def __str__(self) -> str:
-            return f"{self.user.full_name}"
-    class Meta:
-        verbose_name_plural = 'carts'
-        db_table = 'carts'
+#     def __str__(self) -> str:
+#             return f"{self.user.full_name}"
+#     class Meta:
+#         verbose_name_plural = 'carts'
+#         db_table = 'carts'
 
 
 
@@ -207,7 +207,7 @@ class cart_items(models.Model):
     item_id = models.AutoField(primary_key=True)
     quantity = models.IntegerField(null=True, verbose_name='Số lượng')
 
-    cart = models.ForeignKey(carts, on_delete=models.CASCADE, null=True)
+    # cart = models.ForeignKey(carts, on_delete=models.CASCADE, null=True)
     sku = models.ForeignKey(motorbike_skus, on_delete=models.CASCADE, null=True, verbose_name='Phiên bản')
 
     def __str__(self) -> str:

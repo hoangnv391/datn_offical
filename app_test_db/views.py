@@ -18,15 +18,23 @@ def login(request):
         print("password: ", user_password)
 
         try:
-            result = users.objects.get(phone = user_phone)
+            result = users.objects.get(phone = user_phone, password = user_password)
+            request.session["user_id"] = str(result.user_id)
             print("Result: ", result)
+            print(request.session.get("user_id"))
+            return redirect("home")
         except:
             print("No user match")
-        return render(request, "login.html")
+            error = "Số điện thoại hoặc mật khẩu không đúng !"
+            return render(request, "login.html", {
+                "error": error,
+            })
     else:
         # form = UserForm()
         # return render(request, "login.html", {"form" : form})
-        return render(request, "login.html")
+        return render(request, "login.html", {
+            "error": "",
+        })
 
 
 def signup(request):
@@ -69,6 +77,12 @@ def home(request):
     home_skus = []
     default_skus = []
     count = 0
+
+    user_id = request.session.get("user_id")
+    user = None
+
+    if (user_id):
+        user = users.objects.get(user_id = user_id)
 
     # print(motorbike_list)
     for motor in motorbike_list:
@@ -122,6 +136,7 @@ def home(request):
         'motorbikes': motorbike_list,
         'skus': home_skus,
         'default_option': default_skus,
+        'user': user,
     })
 
 def motor_detail(request, slug):
@@ -129,6 +144,13 @@ def motor_detail(request, slug):
     motor_skus = motorbike_skus.objects.filter(motorbike = motor).order_by('price')
 
     option = []
+
+    user_id = request.session.get("user_id")
+    user = None
+
+    if (user_id):
+        user = users.objects.get(user_id = user_id)
+
 
     for sku in motor_skus:
         option.append(sku.option)
@@ -138,12 +160,13 @@ def motor_detail(request, slug):
     motor_features = motorbike_feature_images.objects.filter(motorbike = motor).order_by('image_id')
 
     # fields = [field.value for field in motor_features[0]._meta.get_fields()]
-
-    field_names = [field.name for field in (motor_features[0])._meta.get_fields()]
-
-    for field in field_names:
-    #     print(getattr( motor_features[0], field))
-        print(getattr( (motor_features[0]), field), " ")
+    try:
+        field_names = [field.name for field in (motor_features[0])._meta.get_fields()]
+    except:
+        pass
+        # for field in field_names:
+        # #     print(getattr( motor_features[0], field))
+        #     print(getattr( (motor_features[0]), field), " ")
 
     # print(fields)
 
@@ -155,5 +178,9 @@ def motor_detail(request, slug):
         'options': option,
         'skus': motor_skus,
         'motor_features': motor_features,
+        'user': user,
     })
 
+def logout(request):
+    request.session.flush()
+    return redirect("home")

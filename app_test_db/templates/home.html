@@ -26,6 +26,13 @@
                     </a>
                 </div>
 
+                {% if user != None %}
+                <div class="user_name">
+                    <span>Xin chào, {{user.full_name}}</span>
+                </div>
+                {% endif %}
+
+
                 <div id="store-name" class="header-item">
                     <a href="/">Xe máy Tuấn Mạnh</a>
                 </div>
@@ -43,7 +50,11 @@
                     <li class="header-nav-item"><a href="#">Dòng xe</a></li>
                     <li class="header-nav-item header-search"><a href="#">Tìm kiếm</a></li>
                     <li class="header-nav-item"><a href="#">Giỏ hàng</a></li>
-                    <li class="header-nav-item"><a href="#">Đăng nhập</a></li>
+                    {% if user != None %}
+                    <li class="header-nav-item"><a href="{% url "logout" %}">Đăng xuất</a></li>
+                    {% else %}
+                    <li class="header-nav-item"><a href="{% url "login" %}">Đăng nhập</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

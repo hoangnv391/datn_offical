@@ -25,7 +25,6 @@ motorbikes,\
 motorbike_attributes,\
 motorbike_skus,\
 users,\
-carts,\
 cart_items,\
 order_details,\
 order_items,\
@@ -34,6 +33,8 @@ library_images,\
 motorbike_specs,\
 motorbike_features,\
 motorbike_feature_images
+
+# carts,\
 
 
 
@@ -121,7 +122,7 @@ admin.site.register(motorbikes, DefaultImageAdmin)
 admin.site.register(motorbike_attributes, MotobikeAttributeAdmin)
 admin.site.register(motorbike_skus, SkuImageAdmin)
 admin.site.register(users)
-admin.site.register(carts)
+# admin.site.register(carts)
 admin.site.register(cart_items)
 admin.site.register(order_details)
 admin.site.register(order_items)

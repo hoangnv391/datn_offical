@@ -125,3 +125,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = BASE_DIR / "uploads"
+
+SESSION_COOKIE_AGE = 60

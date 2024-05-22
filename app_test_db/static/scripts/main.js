@@ -49,9 +49,6 @@ function changeBorder(element) {
 
     productImage.src = imgPath;
     productPrice.textContent = formatCurrency(itemPrice);
-
-
-
 }
 
 /* Start: function to change when click an option */
