@@ -35,6 +35,7 @@ imageItems.forEach((item, index) => {
 const allColorItem = document.querySelectorAll('.color-item');
 const productImage = document.querySelector('.product-image').querySelector('img');
 const productPrice = document.querySelector('.price-value');
+const addToCartBtn = document.querySelector('#add-to-cart-id');
 
 productPrice.textContent = formatCurrency(productPrice.textContent);
 
@@ -46,10 +47,14 @@ function changeBorder(element) {
 
     const imgPath = element.getAttribute('data-src');
     const itemPrice = element.getAttribute('data-price');
+    const skuId = element.getAttribute('sku-id');
 
     productImage.src = imgPath;
     productPrice.textContent = formatCurrency(itemPrice);
+    addToCartBtn.setAttribute('sku-id', skuId);
 }
+
+
 
 /* Start: function to change when click an option */
 // const productSkus = document.querySelectorAll('.color-item');

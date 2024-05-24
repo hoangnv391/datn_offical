@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.db import models
+from django.forms import TextInput, Textarea
 
 # from .models import test_table,\
 # motor_types,\
@@ -112,6 +114,12 @@ class MotorbikeFeatureDetailImageAdmin(admin.ModelAdmin):
 class MotobikeAttributeAdmin(admin.ModelAdmin):
     list_filter = ["attribute_type"]
 
+class MotorbikeSpecAdmin(admin.ModelAdmin):
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'20'})},
+        models.TextField: {'widget': Textarea(attrs={'rows':3, 'cols':40})},
+    }
+
 
 # Register your models here.
 # admin.site.register(test_table)
@@ -129,7 +137,7 @@ admin.site.register(order_items)
 admin.site.register(payment_details)
 # admin.site.register(image_table_test, ImageTestAdmin)
 admin.site.register(library_images, LibraryImageAdmin)
-admin.site.register(motorbike_specs)
+admin.site.register(motorbike_specs, MotorbikeSpecAdmin)
 admin.site.register(motorbike_features)
 admin.site.register(motorbike_feature_images, MotorbikeFeatureDetailImageAdmin)
 

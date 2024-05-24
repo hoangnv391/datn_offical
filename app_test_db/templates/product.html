@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ</title>
+    <title>{{motorbike.model}}</title>
     <link rel="stylesheet" href="{% static "css/main.css" %}">
     <link rel="stylesheet" href="{% static "fonts/hyundai-sans/stylesheet.css" %}">
     <link rel="stylesheet" href="{% static "fonts/Raleway/stylesheet.css" %}">
@@ -85,7 +85,7 @@
                     {% for sku in skus %}
                         {% if sku.option == option %}
                         <div class="color-container flex">
-                            <div class="color-item flex" onclick="changeBorder(this)" data-src="{{sku.sku_image.url}}" data-price="{{sku.price}}">
+                            <div class="color-item flex" onclick="changeBorder(this)" data-src="{{sku.sku_image.url}}" data-price="{{sku.price}}" sku-id="{{sku.sku_id}}">
                                 {% if sku.color.color_1 %}
                                 <div class="color-cell" style="background-color: {{sku.color.color_1}};"></div>
                                 {% endif %}
@@ -113,9 +113,10 @@
                     </div>
                 </div>
 
-                <div class="add-to-cart-btn">
-                        <span class="add-to-cart">Thêm vào giỏ hàng</span>
+                <div id="add-to-cart-btn" class="add-to-cart-btn" onclick="addToCart()">
+                        <span id="add-to-cart-id" class="add-to-cart" sku-id="">Thêm vào giỏ hàng</span>
                 </div>
+
 
             </div>
         </div>
@@ -195,118 +196,14 @@
 
                 <div class="spec-table">
                     <table>
+                        {% for key, value in motor_specs.items %}
                         <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
+                            <td class="spec-label">{{key}}</td>
+                            <td class="spec-value">
+                                {{value|safe}}
                             </td>
                         </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Khối lượng bản thân</td>
-                            <td>
-                                SH160i CBS: 133kg
-                                <br>
-                                SH160i ABS: 134kg
-                            </td>
-                        </tr>
+                        {% endfor %}
                     </table>
                 </div>
             </div>
@@ -571,6 +468,8 @@
     <script src="{% static "scripts/swiper_slider.js" %}"></script>
     <script src="{% static "scripts/main.js" %}"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static "scripts/product.js" %}"></script>
 
 </body>
 </html>

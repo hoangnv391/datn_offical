@@ -3,7 +3,6 @@
 }
 .swiper-cards .swiper-slide {
   transform-origin: center bottom;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
+  backface-visibility: hidden;
   overflow: hidden;
-}
+}/*# sourceMappingURL=effect-cards.css.map */

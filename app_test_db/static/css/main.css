@@ -687,14 +687,14 @@ img.hover-zoom-1-2:hover {
 .product-spec .spec-table table {
     color: #515151;
     border-collapse: collapse;
-    line-height: 19px;
+    line-height: 25px;
 }
 
 .product-spec .spec-table td {
-    padding: 8px;
+    padding: 6px 8px;
     font-family: Helvetica, sans-serif;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 /* End: css for product information */

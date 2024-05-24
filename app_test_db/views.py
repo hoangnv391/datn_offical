@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from .forms import UserForm
-from .models import users, brands, motorbikes, motorbike_skus, motorbike_feature_images
-from django.http import HttpResponse
-
+from .models import users, brands, motorbikes, motorbike_skus, motorbike_feature_images, motorbike_specs, cart_items
+from django.http import HttpResponse, JsonResponse
+import json
 
 # Create your views here.
 def login(request):
@@ -160,10 +160,10 @@ def motor_detail(request, slug):
     motor_features = motorbike_feature_images.objects.filter(motorbike = motor).order_by('image_id')
 
     # fields = [field.value for field in motor_features[0]._meta.get_fields()]
-    try:
-        field_names = [field.name for field in (motor_features[0])._meta.get_fields()]
-    except:
-        pass
+    # try:
+    #     field_names = [field.name for field in (motor_features[0])._meta.get_fields()]
+    # except:
+    #     pass
         # for field in field_names:
         # #     print(getattr( motor_features[0], field))
         #     print(getattr( (motor_features[0]), field), " ")
@@ -173,14 +173,87 @@ def motor_detail(request, slug):
     # for field in fields:
     #     print(getattr( motor_features[0], field))
 
+    motor_specs = motorbike_specs.objects.get(motorbike = motor)
+
+    spec_fields = []
+
+    motor_spec_list = {}
+
+    new_line_str = "\r\n"
+
+    html_br_str = "<br>"
+
+    if motor_specs != None:
+        spec_fields = [field.name for field in motor_specs._meta.get_fields()]
+
+        print(spec_fields)
+
+        try:
+        # 'spec_id', 'motorbike'
+            spec_fields.remove('spec_id')
+            spec_fields.remove('motorbike')
+        except:
+            pass
+
+
+        for spec in spec_fields:
+            spec_value = str(getattr(motor_specs, spec))
+            spec_field = str(motor_specs._meta.get_field(spec).verbose_name)
+
+            if new_line_str in spec_value:
+                spec_value = spec_value.replace(new_line_str, html_br_str)
+
+            motor_spec_list[str(spec_field)] = spec_value
+
     return render(request, "product.html", {
         'motorbike': motor,
         'options': option,
         'skus': motor_skus,
         'motor_features': motor_features,
         'user': user,
+        'motor_specs': motor_spec_list,
     })
 
 def logout(request):
     request.session.flush()
     return redirect("home")
+
+def add_to_cart(request):
+    if request.method == 'POST' and request.is_ajax():
+        data = json.loads(request.body)
+        sku_id = data.get('sku_id')
+
+    if sku_id == "":
+        response_data = {'success': True, 'message': 'Vui lòng chọn phiên bản của phương tiện để thêm vào giỏ hàng!'}
+    else:
+        user_id = request.session.get("user_id")
+        sku_id = int(sku_id)
+
+        sku = motorbike_skus.objects.get(sku_id = sku_id)
+
+        user = None
+
+        if (user_id):
+            user = users.objects.get(user_id = user_id)
+            items = cart_items.objects.filter(user = user)
+            duplicate = False
+
+            for item in items:
+                if item.sku == sku:
+                    item.quantity = item.quantity + 1
+                    item.save()
+                    duplicate = True
+
+            if duplicate != True:
+                new_item = cart_items()
+                new_item.user = user
+                new_item.quantity = 1
+                new_item.sku = sku
+                new_item.save()
+
+            response_data = {'success': True, 'message': 'Thêm sản phẩm vào giỏ hàng thành công!'}
+
+        else:
+            response_data = {'success': True, 'message': 'Vui lòng đăng nhập để có thể thêm sản phẩm vào giỏ hàng!'}
+
+    return JsonResponse(response_data)

@@ -205,13 +205,14 @@ class users(models.Model):
 # 8th table: cart_items
 class cart_items(models.Model):
     item_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(users, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Người mua")
     quantity = models.IntegerField(null=True, verbose_name='Số lượng')
 
     # cart = models.ForeignKey(carts, on_delete=models.CASCADE, null=True)
     sku = models.ForeignKey(motorbike_skus, on_delete=models.CASCADE, null=True, verbose_name='Phiên bản')
 
     def __str__(self) -> str:
-        return f"{self.sku.motorbike.model} - {self.sku.option} {self.sku.color} - {self.sku.price}, quantity: {self.quantity}"
+        return f"{self.user.full_name} - {self.sku.motorbike.model} - {self.sku.option} {self.sku.color} - {self.sku.price}, quantity: {self.quantity}"
 
     class Meta:
         verbose_name_plural = 'cart_items'
@@ -290,33 +291,32 @@ class library_images(models.Model):
 #13th table: motorbike_specs
 class motorbike_specs(models.Model):
     spec_id                     = models.AutoField(primary_key=True)
+    motorbike = models.ForeignKey(motorbikes, unique=True, on_delete=models.CASCADE, null=True, verbose_name='Model xe')
 
-    mass_ifself                 = models.FloatField(verbose_name='Khối lượng bản thân', blank=True)
-    length                      = models.IntegerField(verbose_name='Dài', blank=True)
-    width                       = models.IntegerField(verbose_name='Rộng', blank=True)
-    height                      = models.IntegerField(verbose_name='Cao', blank=True)
+    mass_ifself                 = models.TextField(verbose_name='Khối lượng bản thân', blank=True)
+    length_width_height         = models.TextField(verbose_name='Dài x Rộng x Cao', blank=True)
+    # width                       = models.IntegerField(verbose_name='Rộng', blank=True)
+    # height                      = models.IntegerField(verbose_name='Cao', blank=True)
 
-    wheel_hub_spacing           = models.IntegerField(verbose_name='Khoảng cách trục bánh xe', blank=True)
-    saddle_height               = models.IntegerField(verbose_name='Độ cao yên', blank=True)
-    ground_clearance            = models.IntegerField(verbose_name='Khoảng sáng gầm xe', blank=True)
-    fuel_tank_capacity          = models.IntegerField(verbose_name='Dung tích bình xăng', blank=True)
-    front_layer_sizes           = models.CharField(max_length = 100, verbose_name='Kích cỡ lốp trước', blank=True)
-    rear_layer_sizes            = models.CharField(max_length = 100, verbose_name='Kích cỡ lốp sau', blank=True)
-    front_fork                  = models.CharField(max_length = 100, verbose_name='Phuộc trước', blank=True)
-    rear_fork                   = models.CharField(max_length = 100, verbose_name='Phuộc sau', blank=True)
-    engine_type                 = models.CharField(max_length = 100, verbose_name='Loại động cơ', blank=True)
-    max_power                   = models.CharField(max_length = 100, verbose_name='Công suất tối đa', blank=True)
-    machine_viscosity_capacity  = models.CharField(max_length = 100, verbose_name='Dung tích nhớt máy', blank=True)
-    fuel_consumption            = models.CharField(max_length = 100, verbose_name='Mức tiêu thụ nhiên liệu', blank=True)
-    gearbox                     = models.CharField(max_length = 100, verbose_name='Hộp số', blank=True)
-    drive_type                  = models.CharField(max_length = 100, verbose_name='Loại truyền động', blank=True)
-    start_up_system             = models.CharField(max_length = 100, verbose_name='Hệ thống khởi động', blank=True)
-    max_moment                  = models.CharField(max_length = 100, verbose_name='Mô-men xoắn cực đại', blank=True)
-    cylinder_capacity           = models.FloatField(verbose_name='Dung tích xi lanh', blank=True)
-    diameter_plunger_stroke     = models.CharField(max_length = 100, verbose_name='Đường kính x Hành trình pít tông', blank=True)
-    compression_ratio           = models.CharField(max_length = 100, verbose_name='Tỷ số nén', blank=True)
+    wheel_hub_spacing           = models.TextField(max_length = 100 ,verbose_name='Khoảng cách trục bánh xe', blank=True)
+    saddle_height               = models.TextField(max_length = 100 ,verbose_name='Độ cao yên', blank=True)
+    ground_clearance            = models.TextField(max_length = 100 ,verbose_name='Khoảng sáng gầm xe', blank=True)
+    fuel_tank_capacity          = models.TextField(max_length = 100 ,verbose_name='Dung tích bình xăng', blank=True)
+    layer_sizes                 = models.TextField(max_length = 100, verbose_name='Kích cỡ lốp trước/sau', blank=True)
+    front_fork                  = models.TextField(max_length = 100, verbose_name='Phuộc trước', blank=True)
+    rear_fork                   = models.TextField(max_length = 100, verbose_name='Phuộc sau', blank=True)
+    engine_type                 = models.TextField(max_length = 100, verbose_name='Loại động cơ', blank=True)
+    max_power                   = models.TextField(max_length = 100, verbose_name='Công suất tối đa', blank=True)
+    machine_viscosity_capacity  = models.TextField(max_length = 100, verbose_name='Dung tích nhớt máy', blank=True)
+    fuel_consumption            = models.TextField(max_length = 100, verbose_name='Mức tiêu thụ nhiên liệu', blank=True)
+    gearbox                     = models.TextField(max_length = 100, verbose_name='Hộp số', blank=True)
+    drive_type                  = models.TextField(max_length = 100, verbose_name='Loại truyền động', blank=True)
+    start_up_system             = models.TextField(max_length = 100, verbose_name='Hệ thống khởi động', blank=True)
+    max_moment                  = models.TextField(max_length = 100, verbose_name='Mô-men xoắn cực đại', blank=True)
+    cylinder_capacity           = models.TextField(max_length = 100, verbose_name='Dung tích xi lanh', blank=True)
+    diameter_plunger_stroke     = models.TextField(max_length = 100, verbose_name='Đường kính x Hành trình pít tông', blank=True)
+    compression_ratio           = models.TextField(max_length = 100, verbose_name='Tỷ số nén', blank=True)
 
-    motorbike = models.ForeignKey(motorbikes, on_delete=models.CASCADE, null=True, verbose_name='Model xe')
 
     def __str__(self):
         return f"{self.motorbike.model}"
