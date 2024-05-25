@@ -257,3 +257,21 @@ def add_to_cart(request):
             response_data = {'success': True, 'message': 'Vui lòng đăng nhập để có thể thêm sản phẩm vào giỏ hàng!'}
 
     return JsonResponse(response_data)
+
+def cart(request):
+
+    user_id = request.session.get("user_id")
+    user = None
+    items = None
+
+    if (user_id):
+        user = users.objects.get(user_id = user_id)
+        items = cart_items.objects.filter(user = user)
+    else:
+        return redirect("login")
+        pass
+
+    return render(request, "cart.html", {
+        "user": user,
+        "items": items,
+    })
