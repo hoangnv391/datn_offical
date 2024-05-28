@@ -263,10 +263,13 @@ def cart(request):
     user_id = request.session.get("user_id")
     user = None
     items = None
+    total = 0
 
     if (user_id):
         user = users.objects.get(user_id = user_id)
-        items = cart_items.objects.filter(user = user)
+        items = cart_items.objects.filter(user = user, quantity__gt = 0)
+        for item in items:
+            total += item.sku.price * item.quantity
     else:
         return redirect("login")
         pass
@@ -274,4 +277,31 @@ def cart(request):
     return render(request, "cart.html", {
         "user": user,
         "items": items,
+        "total": total,
     })
+
+def change_cart_item_quantity(request):
+    if request.method == 'POST' and request.is_ajax():
+        data = json.loads(request.body)
+        item_id = data.get('item_id')
+        quantity = data.get('quantity')
+        user_id = int(request.session.get("user_id"))
+        current_user = users.objects.get(user_id = user_id)
+        cart_item = cart_items.objects.get(item_id = item_id)
+
+        if quantity == 0:
+            cart_item.delete()
+        else:
+            cart_item.quantity = quantity
+            cart_item.save()
+
+        current_cart_items = cart_items.objects.filter(user = current_user)
+        total_cast = 0
+
+        if current_cart_items.count() > 0:
+            for item in current_cart_items:
+                total_cast += item.sku.price * item.quantity
+
+    response_data = {'success': True, 'message': 'Thay đổi số lượng phương tiện thành công!', 'cast_value': str(total_cast)}
+
+    return JsonResponse(response_data)

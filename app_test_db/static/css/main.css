@@ -752,11 +752,12 @@ img.hover-zoom-1-2:hover {
     font-size: 21px;
 }
 
-.item-info .cart-item-option .item-delete a {
+.item-info .cart-item-option .item-delete {
     font-family: Helvetica, sans-serif;
     font-weight: bold;
     color:#515151;
     font-size: 25px;
+    cursor: pointer;
 }
 
 .cart-item-quantity-and-price {
@@ -769,6 +770,7 @@ img.hover-zoom-1-2:hover {
 }
 
 .cart-item-quantity-and-price .quantity-control-btn i {
+    cursor: pointer;
     font-weight: 0;
 }
 

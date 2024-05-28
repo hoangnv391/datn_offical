@@ -111,7 +111,7 @@
         <div class="wrapper cart-container ">
 
             {% for item in items %}
-            <div class="cart-item-container flex">
+            <div class="cart-item-container flex item-specification">
                 <div class="item-container">
                     <div class="cart-item-image">
                         <img src="{{item.sku.sku_image.url}}" alt="">
@@ -127,20 +127,18 @@
                                 </span>
                             </a>
                         </div>
-                        <div class="item-delete">
-                            <a href="#">
+                        <div class="item-delete" item-id="{{item.item_id}}">
                                 <span><i class="fa fa-times-circle-o" aria-hidden="true"></i></span>
-                            </a>
                         </div>
                     </div>
 
                     <div class="cart-item-quantity-and-price flex flex-align-center">
                         <div class="cart-item-quantity flex flex-align-center">
-                            <div id="quantity-minus-btn" class="quantity-control-btn">
+                            <div class="quantity-control-btn minus">
                                 <i class="fa fa-minus" aria-hidden="true"></i>
                             </div>
-                            <input type="number" min="0" max="100" step="1" value="{{item.quantity}}" data-price="{{item.sku.price}}">
-                            <div id="quantity-add-btn" class="quantity-control-btn">
+                            <input item-id="{{item.item_id}}" class="motobike-quantity" type="number" min="0" max="100" step="1" value="{{item.quantity}}" data-price="{{item.sku.price}}">
+                            <div class="quantity-control-btn add">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
                             </div>
                         </div>
@@ -166,7 +164,7 @@
                     <p>Tổng tiền sản phẩm:</p>
                 </div>
                 <div class="cast-value">
-                    <p>93.000.000đ</p>
+                    <p id="cast-value">{{total}}</p>
                 </div>
             </div>
 
@@ -184,7 +182,7 @@
                     <p>Cần thanh toán:</p>
                 </div>
                 <div class="total-pay-value">
-                    <p>93.000.000đ</p>
+                    <p  id="total-pay-value">{{total}}</p>
                 </div>
             </div>
         </div>
@@ -448,7 +446,15 @@
     </footer>
 
     <script src="{% static "lib/swiper-11.1.1/package/swiper-bundle.min.js" %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script src="{% static "scripts/swiper_slider.js" %}"></script>
+
+    <script>
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static "scripts/main.js" %}"></script>
     <script src="{% static "scripts/cart.js" %}"></script>
 
