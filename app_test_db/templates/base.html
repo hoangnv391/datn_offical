@@ -1,0 +1,216 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block title %}
+    <title>Trang chủ</title>
+    {% endblock title %}
+
+    <link rel="stylesheet" href="{% static "fonts/hyundai-sans/stylesheet.css" %}">
+    <link rel="stylesheet" href="{% static "fonts/Raleway/stylesheet.css" %}">
+    <link rel="stylesheet" href="{% static "lib/swiper-11.1.1/package/swiper-bundle.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/font-awesome-4.7.0/css/font-awesome.min.css" %}">
+
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    {% block css %}
+    {% endblock css %}
+
+
+
+</head>
+<body>
+
+    <header id="header">
+        <div class="header-wrapper wrapper">
+
+            <div id="masthead" class="header-inner">
+
+                <!-- Logo -->
+                <div id="logo" class="logo header-item">
+                    <a href="/" class="logo-link">
+                        <img src="{% static "imgs/logo/horozontal_logo.png" %}" alt="store-logo">
+                    </a>
+                </div>
+
+                {% if user != None %}
+                <div class="user_name">
+                    <span>Xin chào, {{user.full_name}}</span>
+                </div>
+                {% endif %}
+
+
+                <div id="store-name" class="header-item">
+                    <a href="/">Xe máy Tuấn Mạnh</a>
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="header-nav-container">
+            <div id="wide-nav" class="wrapper">
+                <ul id="header-nav">
+                    <li class="header-nav-item"><a href="{% url "home" %}">Trang chủ</a></li>
+                    <li class="header-nav-item"><a href="#">Hãng xe</a></li>
+                    <li class="header-nav-item"><a href="#">Dòng xe</a></li>
+                    <li class="header-nav-item header-search"><a href="#">Tìm kiếm</a></li>
+                    <li class="header-nav-item"><a href="{% url "cart" %}">Giỏ hàng</a></li>
+                    {% if user != None %}
+                    <li class="header-nav-item"><a href="{% url "logout" %}">Đăng xuất</a></li>
+                    {% else %}
+                    <li class="header-nav-item"><a href="{% url "login" %}">Đăng nhập</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+
+        {% block content %}
+        {% endblock content %}
+
+    </main>
+
+    <footer id="footer">
+        <div class="footer-container wrapper flex">
+            <div class="brand-information">
+                <div class="brand-logo-container">
+                    <img src="{% static "imgs/logo/horozontal_logo.png" %}" alt="">
+                </div>
+                <div class="brand-title-container">
+                    <p class="brand-title">
+                        <strong>Hệ thống cửa hàng xe máy Tuấn Mạnh – 16 cửa hàng</strong>
+                    </p>
+                </div>
+                <div class="contact-container">
+                    <div class="phone-container">
+                        <p class="phone">
+                            <span>Hotline: 1900.1xxx&nbsp; |&nbsp; &nbsp; Cứu hộ: 1900.1xxx</span>
+                        </p>
+                    </div>
+                    <div class="email-container">
+                        <p class="email">
+                            <span>
+                                Email:
+                                <a href="mailto:cskhhtp02@gmail.com">
+                                    cskhhtp02@gmail.com
+                                </a>
+                            </span>
+                        </p>
+                        <p class="website">
+                            <span>
+                                Website:
+                                <a href="https://xemayhungthinh.vn/">
+                                    xemaytuanmanh.vn
+                                </a>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="brand-store">
+                <div class="brand-store-container">
+                    <div class="system-store-title">
+                        <h3>
+                            <b></b>
+                            <span>Hệ thống cửa hàng xe máy Tuấn Mạnh</span>
+                            <b></b>
+                        </h3>
+                    </div>
+
+                </div>
+
+                <div class="system-store-container grid">
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Lý Bôn  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Vũ Thư 1  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Kiến Xương 2  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Tiền Hải  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Minh Khai 1  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Minh Khai 2  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Vũ Thư 2  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Quang Trung 1  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Quang Trung 2  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Trần Thái Tông  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Gia Lễ  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Đông Hưng  </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Quỳnh Côi </span>
+                        </a>
+                    </p>
+                    <p class="store">
+                        <a>
+                            <span><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> Tuấn Mạnh Quang Bình  </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    <script src="{% static "lib/swiper-11.1.1/package/swiper-bundle.min.js" %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static "scripts/main.js" %}"></script>
+    <script src="{% static "scripts/swiper_slider.js" %}"></script>
+
+    {% block script %}
+    {% endblock script %}
+
+</body>
+</html>
