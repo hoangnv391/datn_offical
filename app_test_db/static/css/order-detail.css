@@ -1,0 +1,25 @@
+.order-item-quantity {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.order-item-quantity,  .order-item-quantity input{
+    background-color: #0a4d99;
+    color:white;
+    font-size: 18px;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.order-item-quantity input {
+    font-size: 25px;
+}
+
+.cart-item-quantity-and-price input {
+    border: 0;
+    margin: 0;
+}
+
+.add-to-cart-btn {
+    background-color: #0a4d99;
+}

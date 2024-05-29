@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load static %}
+
+    {% block title %}
+    <title>Giỏ hàng</title>
+    {% endblock title %}
+
+    {% block css %}
+    <link rel="stylesheet" href="{% static "css/order-detail.css" %}">
+    {% endblock css %}
+
+    {% block content %}
+
+    {% include "includes/slider.html" %}
+
+    <div class="branch-banner">
+        <div class="gap-element"></div>
+        <div class="branch-banner-wrapper wrapper">
+            <div class="section-title-container">
+                <h1 class="section-title">
+                    <b></b>
+                    <span class="section-title-main">
+                        CHI TIẾT ĐƠN HÀNG
+                    </span>
+                    <b></b>
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper cart-container ">
+
+        {% for item in items %}
+        <div class="cart-item-container flex item-specification">
+            <div class="item-container">
+                <div class="cart-item-image">
+                    <img src="{{item.sku.sku_image.url}}" alt="">
+                </div>
+            </div>
+
+            <div class="item-info">
+                <div class="cart-item-option flex flex-align-center">
+                    <div class="option">
+                        <a href="#" class="option-link">
+                            <span>
+                                {{item.sku.motorbike.model}} - {{item.sku.option.value}} - {{item.sku.color.value}}
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cart-item-quantity-and-price flex flex-align-center">
+                    <div class="order-item-quantity">
+                        <p>Số lượng: {{item.quantity}}
+                        </p>
+                    </div>
+
+                    <div class="cart-item-price">
+                        <p class="item-price-cart">
+                            {{item.sku.price}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+
+
+
+    </div>
+
+    <div class=" cart-item-container  total-cast">
+        <div class="cast flex">
+            <div class="cast-label">
+                <p>Tổng tiền sản phẩm:</p>
+            </div>
+            <div class="cast-value">
+                <p id="cast-value">{{order.total}}</p>
+            </div>
+        </div>
+
+        <div class="transport-fee flex">
+            <div class="transport-fee-label">
+                <p>Phí vận chuyển:</p>
+            </div>
+            <div class="transport-fee-value">
+                <p>0đ</p>
+            </div>
+        </div>
+
+        <div class="total-pay flex">
+            <div class="total-pay-label">
+                <p>Cần thanh toán:</p>
+            </div>
+            <div class="total-pay-value">
+                <p  id="total-pay-value">{{order.total}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class=" cart-item-container  total-cast">
+        <div id="address" class="cast">
+            <form action="" method="POST">
+                {% csrf_token %}
+                <label for="address">Địa chỉ giao hàng:</label><br>
+                <input class="address-input" type="text" id="address" name="address"
+                placeholder="Để trống để chọn địa chỉ mặc định" value="{{order.address}}" readonly><br>
+                <button class="add-to-cart-btn" type="submit" disabled>
+                TRẠNG THÁI ĐƠN HÀNG:<span style="margin-right: 15px;"></span>
+                {% if order.order_status == 'ordered' %}
+                    Đã đặt hàng
+                {% elif order.order_status == 'processing' %}
+                    Đang xử lý
+                {% elif order.order_status == 'success' %}
+                    Thành công
+                {% elif order.order_status == 'canceled' %}
+                    Đã hủy
+                {% endif %}
+                </button>
+            </form>
+        </div>
+    </div>
+
+    {% include "includes/service.html" %}
+
+    {% endblock content %}
+
+    {% block script %}
+    <script src="{% static "scripts/cart.js" %}"></script>
+    {% endblock script %}

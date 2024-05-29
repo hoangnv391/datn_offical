@@ -244,6 +244,11 @@ class orders(models.Model):
 
     user = models.ForeignKey(users, on_delete=models.CASCADE, null=True, verbose_name='Người mua')
 
+    address = models.CharField(max_length=500,
+                            #    blank=False, null=False,
+                               blank=True, null=True,
+                               verbose_name='Địa chỉ giao hàng',)
+
     def __str__(self) -> str:
         return f"{self.user}"
 

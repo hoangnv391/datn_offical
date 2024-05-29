@@ -343,9 +343,6 @@ def change_cart_item_quantity(request):
 
     return JsonResponse(response_data)
 
-def create_order(request):
-    pass
-
 def order_list(request):
     user_id = request.session.get("user_id")
     user_id = int(user_id)
@@ -363,3 +360,23 @@ def order_list(request):
     return render(request, "order-list.html", {
         'orders': current_orders,
     })
+
+def order_detail(request, order_id):
+
+    current_order = orders.objects.get(order_id = order_id)
+
+    current_user_id = int(request.session.get("user_id"))
+
+    if current_user_id:
+        order_user_id = current_order.user.user_id
+
+        if current_user_id == order_user_id:
+            current_order_items = order_items.objects.filter(order = current_order)
+            return render(request, "order-detail.html", {
+                "order": current_order,
+                "items": current_order_items,
+            })
+        else:
+            return redirect("login")
+    else:
+        return redirect("login")
