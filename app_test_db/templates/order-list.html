@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>Danh sách đơn hàng</title>
+{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static "css/order-list.css" %}">
+{% endblock css %}
+
+{% block content %}
+
+    {% include "includes/slider.html" %}
+
+    <!-- Start: Branch banner section -->
+    <div class="branch-banner">
+        <div class="gap-element"></div>
+        <div class="branch-banner-wrapper wrapper">
+            <div class="section-title-container">
+                <h1 class="section-title">
+                    <b></b>
+                    <span class="section-title-main">
+                        DANH SÁCH ĐƠN HÀNG
+                    </span>
+                    <b></b>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!-- End: Branch banner section -->
+
+    {% for key,value in orders.items %}
+    <div class="wrapper cart-container order-container">
+        <div class="cart-item-container flex">
+            <div class="item-container">
+                <div class="item-image" style="max-height: 100px">
+                    <img src="{{value.sku_image.url}}" alt="">
+                </div>
+            </div>
+
+
+            <div class="item-info order-info">
+                <div class="cart-item-option flex flex-align-center">
+                    <div class="option">
+                        <a href="#" class="option-link">
+                            <span>
+                                Mã đơn hàng: {{key.order_id}} - Ngày đặt hàng: {{key.created_date}}
+                            </span>
+                        </a>
+                    </div>
+                    <div class="order-option flex">
+                        <div class="order-option-download-bill">
+                            <a href="#">
+                                <span>Tải hóa đơn</span>
+                            </a>
+                        </div>
+                        <div class="order-option-view-detail">
+                            <a href="#">
+                                <span>Xem chi tiết</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-item-quantity-and-price flex flex-align-center">
+                    <div class="cart-item-quantity flex flex-align-center order-status">
+                        {% if key.order_status == 'ordered' %}
+                            Đã đặt hàng
+                        {% elif key.order_status == 'processing' %}
+                            Đang xử lý
+                        {% elif key.order_status == 'success' %}
+                            Thành công
+                        {% elif key.order_status == 'canceled' %}
+                            Đã hủy
+                        {% endif %}
+                    </div>
+
+                    <div class="cart-item-price order-pay">
+                        <p class="">Tổng thanh toán: <span class="order-cast">{{key.total}}</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% include "includes/service.html" %}
+
+{% endblock content %}

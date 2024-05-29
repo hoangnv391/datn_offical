@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from .forms import UserForm
-from .models import users, brands, motorbikes, motorbike_skus, motorbike_feature_images, motorbike_specs, cart_items
+from .models import users, brands, motorbikes, motorbike_skus, motorbike_feature_images, motorbike_specs, cart_items, orders, order_items
 from django.http import HttpResponse, JsonResponse
 import json
+from datetime import date
 
 # Create your views here.
 def login(request):
@@ -259,26 +260,62 @@ def add_to_cart(request):
     return JsonResponse(response_data)
 
 def cart(request):
+    if request.method == 'POST':
+        user_id = request.session.get("user_id")
+        user_id = int(user_id)
 
-    user_id = request.session.get("user_id")
-    user = None
-    items = None
-    total = 0
+        current_user = users.objects.get(user_id = user_id)
 
-    if (user_id):
-        user = users.objects.get(user_id = user_id)
-        items = cart_items.objects.filter(user = user, quantity__gt = 0)
-        for item in items:
-            total += item.sku.price * item.quantity
+        if current_user:
+            items = cart_items.objects.filter(user = current_user)
+            total_cast = 0
+            # create new order
+            new_order = orders()
+            new_order.created_date = date.today()
+            new_order.updated_on = date.today()
+            new_order.order_status = orders.Order_Status.ORDERED
+            new_order.user = current_user
+            new_order.save()
+
+            # create new item order
+            for item in items:
+                new_order_item = order_items()
+                new_order_item.quantity = item.quantity
+                new_order_item.order = new_order
+                new_order_item.sku = item.sku
+                new_order_item.save()
+
+                total_cast += item.sku.price
+
+                item.delete()
+
+            new_order.total = total_cast
+            new_order.save()
+
+            return redirect("home")
+        else:
+            return redirect("login")
+
     else:
-        return redirect("login")
-        pass
+        user_id = request.session.get("user_id")
+        user = None
+        items = None
+        total = 0
 
-    return render(request, "cart.html", {
-        "user": user,
-        "items": items,
-        "total": total,
-    })
+        if (user_id):
+            user = users.objects.get(user_id = user_id)
+            items = cart_items.objects.filter(user = user, quantity__gt = 0)
+            for item in items:
+                total += item.sku.price * item.quantity
+        else:
+            return redirect("login")
+            pass
+
+        return render(request, "cart.html", {
+            "user": user,
+            "items": items,
+            "total": total,
+        })
 
 def change_cart_item_quantity(request):
     if request.method == 'POST' and request.is_ajax():
@@ -305,3 +342,24 @@ def change_cart_item_quantity(request):
     response_data = {'success': True, 'message': 'Thay đổi số lượng phương tiện thành công!', 'cast_value': str(total_cast)}
 
     return JsonResponse(response_data)
+
+def create_order(request):
+    pass
+
+def order_list(request):
+    user_id = request.session.get("user_id")
+    user_id = int(user_id)
+
+    current_user = users.objects.get(user_id = user_id)
+    user_orders = orders.objects.filter(user = current_user).order_by('created_date', '-order_id')
+    current_orders = {}
+
+    for order in user_orders:
+        order_item = (order_items.objects.filter(order = order))[0]
+        current_orders[order] = order_item.sku
+
+    print(current_orders)
+
+    return render(request, "order-list.html", {
+        'orders': current_orders,
+    })

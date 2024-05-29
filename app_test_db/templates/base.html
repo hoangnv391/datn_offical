@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="{% static "fonts/Raleway/stylesheet.css" %}">
     <link rel="stylesheet" href="{% static "lib/swiper-11.1.1/package/swiper-bundle.min.css" %}">
     <link rel="stylesheet" href="{% static "css/font-awesome-4.7.0/css/font-awesome.min.css" %}">
-
     <link rel="stylesheet" href="{% static "css/main.css" %}">
+
     {% block css %}
     {% endblock css %}
 
@@ -31,7 +31,7 @@
 
                 <!-- Logo -->
                 <div id="logo" class="logo header-item">
-                    <a href="/" class="logo-link">
+                    <a href="{% url "home" %}" class="logo-link">
                         <img src="{% static "imgs/logo/horozontal_logo.png" %}" alt="store-logo">
                     </a>
                 </div>
@@ -44,7 +44,7 @@
 
 
                 <div id="store-name" class="header-item">
-                    <a href="/">Xe máy Tuấn Mạnh</a>
+                    <a href="{% url "home" %}">Xe máy Tuấn Mạnh</a>
                 </div>
 
             </div>
@@ -59,8 +59,9 @@
                     <li class="header-nav-item"><a href="#">Hãng xe</a></li>
                     <li class="header-nav-item"><a href="#">Dòng xe</a></li>
                     <li class="header-nav-item header-search"><a href="#">Tìm kiếm</a></li>
-                    <li class="header-nav-item"><a href="{% url "cart" %}">Giỏ hàng</a></li>
                     {% if user != None %}
+                    <li class="header-nav-item"><a href="{% url "order-list" %}">Đơn hàng</a></li>
+                    <li class="header-nav-item"><a href="{% url "cart" %}">Giỏ hàng</a></li>
                     <li class="header-nav-item"><a href="{% url "logout" %}">Đăng xuất</a></li>
                     {% else %}
                     <li class="header-nav-item"><a href="{% url "login" %}">Đăng nhập</a></li>

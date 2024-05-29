@@ -1,0 +1,35 @@
+/* Start: CSS for order list */
+
+.cart-item-quantity-and-price .order-status {
+    background-color: #0a4d99;
+    border: 0;
+    color: white;
+    font-family: 'Raleway Semibold';
+    padding: 15px;
+    cursor: default;
+}
+
+.order-option-download-bill a, .order-option-view-detail a {
+    background-color: #0a4d99;
+    color: white;
+    padding: 6px 10px;
+    font-family: 'Raleway Semibold';
+    border-radius: 5px;
+}
+
+.order-option-download-bill a {
+    margin-right: 10px;
+}
+
+.order-pay {
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.order-pay .order-cast {
+    margin-left: 10px;
+    color: #cc0000;
+}
+
+/* End: CSS for order list */

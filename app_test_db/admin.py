@@ -28,13 +28,12 @@ motorbike_attributes,\
 motorbike_skus,\
 users,\
 cart_items,\
-order_details,\
 order_items,\
-payment_details,\
 library_images,\
 motorbike_specs,\
 motorbike_features,\
-motorbike_feature_images
+motorbike_feature_images,\
+orders
 
 # carts,\
 
@@ -132,9 +131,8 @@ admin.site.register(motorbike_skus, SkuImageAdmin)
 admin.site.register(users)
 # admin.site.register(carts)
 admin.site.register(cart_items)
-admin.site.register(order_details)
+admin.site.register(orders)
 admin.site.register(order_items)
-admin.site.register(payment_details)
 # admin.site.register(image_table_test, ImageTestAdmin)
 admin.site.register(library_images, LibraryImageAdmin)
 admin.site.register(motorbike_specs, MotorbikeSpecAdmin)

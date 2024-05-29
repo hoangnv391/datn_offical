@@ -108,7 +108,7 @@
             <form action="" method="POST">
                 {% csrf_token %}
                 <label for="address">Địa chỉ giao hàng:</label><br>
-                <input type="text" id="address" name="address" required><br>
+                <input class="address-input" type="text" id="address" name="address" placeholder="Để trống để chọn địa chỉ mặc định"><br>
                 <button class="add-to-cart-btn" type="submit">Xác nhận thanh toán</button>
             </form>
         </div>

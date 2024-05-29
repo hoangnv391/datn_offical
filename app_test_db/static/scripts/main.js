@@ -7,9 +7,14 @@ function formatCurrency(value) {
 
 // Lấy tất cả các thẻ p có class là "item-price"
 const priceElements = document.querySelectorAll('.item-price');
+const orderTotalCast = document.querySelectorAll('.order-cast');
 
 // Lặp qua từng thẻ p và cập nhật nội dung
 priceElements.forEach(function(element) {
+    element.textContent = formatCurrency(element.textContent);
+});
+
+orderTotalCast.forEach(function(element) {
     element.textContent = formatCurrency(element.textContent);
 });
 

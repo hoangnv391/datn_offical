@@ -831,9 +831,16 @@ input[type="number"] {
     padding: 0 10px;
 }
 
+#address input[type="text"]::placeholder {
+    font-size: 16px;
+    font-family: 'Raleway Semibold';
+}
 
 #address button {
     border: 0;
 }
 
+.address-input {
+    font-size: 10px;
+}
 /* End: css for cart site */

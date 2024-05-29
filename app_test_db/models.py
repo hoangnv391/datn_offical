@@ -219,10 +219,28 @@ class cart_items(models.Model):
         db_table = 'cart_items'
 
 # 9th table: order_details
-class order_details(models.Model):
+class orders(models.Model):
     order_id = models.AutoField(primary_key=True)
-    total = models.IntegerField(null=True, verbose_name='Tổng số lượng xe')
     # status = models.CharField(max_length=50, null=True) #change to options
+
+    created_date = models.DateField(null=True, blank=True, verbose_name='Ngày tạo đơn hàng')
+    updated_on = models.DateField(null=True, blank=True, verbose_name='Ngày cập nhật đơn hàng')
+
+    class Order_Status(models.TextChoices):
+        ORDERED = 'ordered', 'Đã đặt hàng'
+        PROCESSING = 'processing', 'Đang xử lý'
+        SUCCESS = 'success', 'Giao hàng thành công'
+        CANCELED = 'canceled', 'Đã hủy'
+
+    order_status = models.CharField(
+        max_length=20,
+        choices=Order_Status.choices,
+        default=Order_Status.ORDERED,
+        verbose_name='Tình trạng',
+        null=True,
+        blank=True)
+
+    total = models.IntegerField(blank=True, null=True)
 
     user = models.ForeignKey(users, on_delete=models.CASCADE, null=True, verbose_name='Người mua')
 
@@ -230,15 +248,15 @@ class order_details(models.Model):
         return f"{self.user}"
 
     class Meta:
-        verbose_name_plural = 'order_details'
-        db_table = 'order_details'
+        verbose_name_plural = 'orders'
+        db_table = 'orders'
 
 # 10th table: order_items
 class order_items(models.Model):
     item_id = models.AutoField(primary_key=True)
     quantity = models.IntegerField(null=True, verbose_name='Số lượng')
 
-    order = models.ForeignKey(order_details, on_delete=models.CASCADE, null=True)
+    order = models.ForeignKey(orders, on_delete=models.CASCADE, null=True)
     sku = models.ForeignKey(motorbike_skus, on_delete=models.CASCADE, null=True, verbose_name='Phiên bản xe')
 
     def __str__(self) -> str:
@@ -247,21 +265,6 @@ class order_items(models.Model):
     class Meta:
         verbose_name_plural = 'order_items'
         db_table = 'order_items'
-
-# 11th table: payment_details
-class payment_details(models.Model):
-    payment_id = models.AutoField(primary_key=True)
-    payment_type = models.CharField(max_length=20, verbose_name='Kiểu thanh toán')
-    # status = models.CharField(max_length=50) #change to option
-
-    order = models.ForeignKey(order_details, on_delete=models.CASCADE, null=True)
-
-    def __str__(self) -> str:
-        return f"{self.order.user.full_name} - {self.payment_type}"
-
-    class Meta:
-        verbose_name_plural = 'payment_details'
-        db_table = 'payment_details'
 
 
 # test table for image
