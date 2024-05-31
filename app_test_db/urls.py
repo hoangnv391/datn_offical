@@ -14,5 +14,5 @@ urlpatterns = [
     path("cart/change-quantity", views.change_cart_item_quantity, name="change-cart-item-quantity"),
     path("order/order-list", views.order_list, name="order-list"),
     path("order/detail/<int:order_id>", views.order_detail, name="order-detail"),
-    
+    path("order/order-bill-download/<int:order_id>", views.order_bill_download, name="order-bill-download")
 ]

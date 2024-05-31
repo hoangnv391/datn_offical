@@ -2,10 +2,14 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from .forms import UserForm
 from .models import users, brands, motorbikes, motorbike_skus, motorbike_feature_images, motorbike_specs, cart_items, orders, order_items
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, FileResponse, StreamingHttpResponse
 import json
 from datetime import date
-
+from django.conf import settings
+from .pdf_engine import PDF, money_format
+from fpdf import FPDF
+from pathlib import Path
+import os
 # Create your views here.
 def login(request):
     if request.method == "POST":
@@ -260,6 +264,9 @@ def add_to_cart(request):
     return JsonResponse(response_data)
 
 def cart(request):
+    # print(str(settings.MEDIA_ROOT) + '''\logo\horizontal_logo.png''')
+
+
     if request.method == 'POST':
         user_id = request.session.get("user_id")
         user_id = int(user_id)
@@ -285,14 +292,81 @@ def cart(request):
                 new_order_item.sku = item.sku
                 new_order_item.save()
 
-                total_cast += item.sku.price
+                total_cast += item.sku.price * item.quantity
 
-                item.delete()
+                # item.delete()
 
             new_order.total = total_cast
             new_order.save()
 
-            return redirect("home")
+            # create bill
+            order_bill = PDF()
+            order_bill.add_page()
+
+            # Set auto page break
+            order_bill.set_auto_page_break(auto=True, margin=15) # margin is the space from bttom of page to page break
+
+            order_bill.add_centered_image(str(settings.MEDIA_ROOT) + '''\logo\horizontal_logo.png''')
+            order_bill.ln(5)
+
+            # order_bill.add_font('NunitoBold', '', r'Nunito-Bold.ttf')
+
+            font_path = os.path.join(os.path.dirname(__file__), "Nunito-Bold.ttf")
+            order_bill.add_font('NunitoBold', '', font_path)
+            order_bill.set_font('NunitoBold', '', 20)
+
+            order_bill.set_x(0)
+            order_bill.cell(0, 10, 'HÓA ĐƠN BÁN HÀNG', 0, 1, 'C')
+            order_bill.ln(5)
+
+            order_bill.set_font('NunitoBold', '', 12)  # Thiết lập font chữ Arial cho nội dung bảng
+            order_bill.set_x(15)
+            order_bill.cell(80, 10, f'Khách hàng: {current_user.full_name}')
+
+            order_bill.cell(40, 10)
+            order_bill.cell(40, 10, f'SĐT: {current_user.phone}')
+            order_bill.ln()
+
+            order_bill.set_x(15)
+            order_bill.cell(80, 10, f'Ngày lập hóa đơn: {new_order.created_date}')
+            order_bill.ln()
+
+            address = f"Địa chỉ: {new_order.address}"
+            order_bill.set_x(15)
+            order_bill.multi_cell(180, 10, address)
+
+            # Dữ liệu cho bảng
+            data = [
+                ['STT', 'Phương tiện (Phiên bản và số lượng)', 'Đơn giá'],
+                # ['1', 'SH160i, Đặc biệt ABC, Đen đỏ trắng, số lượng: 1', '101.000.000đ'],
+                # ['1', 'SH160i, Đặc biệt ABC, Đen đỏ trắng, số lượng: 1', '101.000.000đ'],
+                # ['1', 'SH160i, Đặc biệt ABC, Đen đỏ trắng, số lượng: 1', '101.000.000đ'],
+            ]
+
+            count = 1
+            for item in items:
+                new_data = [str(count), f'{item.sku.motorbike.model}, {item.sku.option.value}, {item.sku.color.value}, Số lượng: {item.quantity}', money_format(str(item.sku.price))]
+                count = count + 1
+                data.append(new_data)
+
+                # will need to add item.delete() here
+                item.delete()
+
+            # Gọi phương thức create_table để vẽ bảng
+            order_bill.create_table(data, money_format(str(total_cast)))
+            order_bill.ln(15)
+
+            order_bill.set_x(15)
+            order_bill.cell(60, 10, 'Chữ ký bên mua', 0, 0, 'C')
+            order_bill.cell(60, 10, '')
+            order_bill.cell(60, 10, 'Chữ ký bên bán', 0, 0, 'C')
+
+            order_bill.output(str(settings.MEDIA_ROOT) + f'\\order_bills\\{new_order.order_id}.pdf')
+
+# app_test_db\static\fonts\Nunito\static\Nunito-Bold.ttf
+
+
+            return redirect("order-list")
         else:
             return redirect("login")
 
@@ -352,8 +426,11 @@ def order_list(request):
     current_orders = {}
 
     for order in user_orders:
-        order_item = (order_items.objects.filter(order = order))[0]
-        current_orders[order] = order_item.sku
+        try:
+            order_item = (order_items.objects.filter(order = order))[0]
+            current_orders[order] = order_item.sku
+        except:
+            pass
 
     print(current_orders)
 
@@ -380,3 +457,17 @@ def order_detail(request, order_id):
             return redirect("login")
     else:
         return redirect("login")
+
+def order_bill_download(request, order_id):
+    file_name = str(order_id) + '.pdf'
+    pdf_path = os.path.join(settings.MEDIA_ROOT, 'order_bills', file_name)
+    file_name = 'order_bill_' + str(order_id) + '.pdf'
+    print(pdf_path)
+
+    # return redirect("home")
+
+    if os.path.exists(pdf_path):
+        response = StreamingHttpResponse(open(pdf_path, 'rb'), content_type='application/octet-stream')
+        response['Content-Disposition'] = f'attachment; filename={file_name}'
+        return response
+    return HttpResponse('PDF not found.')

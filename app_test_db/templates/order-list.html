@@ -51,7 +51,7 @@
                     </div>
                     <div class="order-option flex">
                         <div class="order-option-download-bill">
-                            <a href="#">
+                            <a href="{% url "order-bill-download" order_id=key.order_id %}" download>
                                 <span>Tải hóa đơn</span>
                             </a>
                         </div>
