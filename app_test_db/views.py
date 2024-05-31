@@ -471,3 +471,59 @@ def order_bill_download(request, order_id):
         response['Content-Disposition'] = f'attachment; filename={file_name}'
         return response
     return HttpResponse('PDF not found.')
+
+def search_engine(request):
+    user_id = request.session.get("user_id")
+    user = None
+
+    if (user_id):
+        user = users.objects.get(user_id = user_id)
+
+    print("test")
+    input_str = request.POST['input']
+    input_str = str(input_str)
+
+    key_list = input_str.split()
+
+    result_motor_list = []
+    result_brand_list = []
+    result_sku_list = []
+    result_defaut_option = []
+
+    motors = motorbikes.objects.all()
+
+    for input in key_list:
+        print('\n')
+        input = input.lower()
+
+        for motor in motors:
+            model = str(motor.model).lower()
+            if input in model:
+                result_motor_list.append(motor)
+                result_brand_list.append(motor.brand)
+
+                tmp_skus = motorbike_skus.objects.filter(motorbike = motor)
+
+                result_sku_list.extend(list(tmp_skus))
+                result_defaut_option.append(tmp_skus[0])
+
+    result_motor_list       = list(set(result_motor_list))
+    result_brand_list       = list(set(result_brand_list))
+    result_sku_list         = list(set(result_sku_list))
+    result_defaut_option    = list(set(result_defaut_option))
+
+    print(result_motor_list, "\n")
+    print(result_brand_list, "\n")
+    print(result_sku_list, "\n")
+    print(result_defaut_option, "\n")
+
+    # print(key_list)
+    # print(input_str)
+
+    return render(request, "search-text.html", {
+        'brands': result_brand_list,
+        'motorbikes': result_motor_list,
+        'skus': result_sku_list,
+        'default_option': result_defaut_option,
+        'user': user,
+    })

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+<title>Trang chủ</title>
+{% endblock title %}
+
+{% block content %}
+
+    {% include "includes/slider.html" %}
+
+    <!-- Start: Branch banner section -->
+    <div class="branch-banner" style="padding-bottom: 0;">
+        <div class="gap-element"></div>
+        <div class="branch-banner-wrapper wrapper">
+            <div class="section-title-container">
+                <h1 class="section-title">
+                    <b></b>
+                    <span class="section-title-main">
+                        KẾT QUẢ TÌM KIẾM
+                    </span>
+                    <b></b>
+                </h1>
+            </div>
+        </div>
+    </div>
+    <!-- End: Branch banner section -->
+
+    <!-- Start: Generate motobikes for each brand -->
+    {% for brand in brands %}
+    <div class="product {{ brand.brand_name }}">
+        <div class="gap-element"></div>
+        <div class="product-wrapper wrapper">
+            <div class="section-title-container">
+                <h1 class="section-title">
+                    <b></b>
+                    <span class="section-title-main text-uppercase">
+                        {{ brand.brand_name }}
+                    </span>
+                    <b></b>
+                </h1>
+            </div>
+
+            <div class="product-list {{ brand.brand_name }}">
+
+
+                {% for motor in motorbikes %}
+
+                    {% if motor.brand.brand_name == brand.brand_name %}
+                        <div class="product-item over-hidden flex flex-column flex-align-center">
+                            <div class="item-image">
+                                <a href="{% url "motor-detail-page" motor.model_slug %}" class="product-link">
+                                    <img src="{{motor.image.url}}" alt="" class="item-image-inner hover-zoom-1-2">
+                                </a>
+                            </div>
+
+                            <div class="item-text flex flex-column flex-align-center">
+                                {% for sku in skus %}
+                                    {% if sku.motorbike == motor %}
+
+                                    {% endif %}
+                                {% endfor %}
+                                <small class="item-version">
+                                    {% for default_sku in default_option %}
+                                        {% if default_sku.motorbike == motor %}
+                                        {{default_sku.option.value}}
+                                        {% endif %}
+                                    {% endfor %}
+                                </small>
+
+                                <ul class="item-version-list flex">
+                                    {% for sku in skus %}
+                                        {% if sku.motorbike == motor %}
+                                            <li class="item-option" data-src="{{sku.sku_image.url}}" data-option="{{sku.option.value}}" data-price="{{sku.price}}" ><span style="background-color: {{ sku.color.color_1 }};" class="{{sku.sku_id}}"></span></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                                <p class="item-name">
+                                    <a href="#">{{motor.model}}</a>
+                                </p>
+                                <p class="item-price">
+                                    {{ motor.motor_cost }}₫
+                                </p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+
+
+
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- End: Generate motobikes for each brand -->
+
+    {% include "includes/service.html" %}
+
+{% endblock content %}

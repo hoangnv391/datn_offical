@@ -58,7 +58,15 @@
                     <li class="header-nav-item"><a href="{% url "home" %}">Trang chủ</a></li>
                     <li class="header-nav-item"><a href="#">Hãng xe</a></li>
                     <li class="header-nav-item"><a href="#">Dòng xe</a></li>
-                    <li class="header-nav-item header-search"><a href="#">Tìm kiếm</a></li>
+
+                    <li class="header-nav-item header-search">
+                        <form class="search-form flex" action="{% url "search" %}" method="post">
+                        {% csrf_token %}
+                            <input  class="header-search-input" type="text" name="input" placeholder="Nhập tên xe để tìm kiếm">
+                            <button type="submit" class="header-search-btn"><p>Tìm kiếm</p></button>
+                        </form>
+                    </li>
+
                     {% if user != None %}
                     <li class="header-nav-item"><a href="{% url "order-list" %}">Đơn hàng</a></li>
                     <li class="header-nav-item"><a href="{% url "cart" %}">Giỏ hàng</a></li>
