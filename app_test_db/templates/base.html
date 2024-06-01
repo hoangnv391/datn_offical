@@ -77,13 +77,18 @@
                         <form class="search-form flex" action="{% url "search" %}" method="post">
                         {% csrf_token %}
                             <input  class="header-search-input" type="text" name="input" placeholder="Nhập tên xe để tìm kiếm">
-                            <button type="submit" class="header-search-btn"><p>Tìm kiếm</p></button>
+                            <button type="submit" class="header-search-btn"><p>
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </p></button>
                         </form>
                     </li>
 
                     {% if user != None %}
+                    <li class="header-nav-item"><a href="{% url "cart" %}">
+                        <i class="fa fa-shopping-cart" aria-hidden="true" style="padding-right: 5px;"></i>
+                        Giỏ hàng
+                    </a></li>
                     <li class="header-nav-item"><a href="{% url "order-list" %}">Đơn hàng</a></li>
-                    <li class="header-nav-item"><a href="{% url "cart" %}">Giỏ hàng</a></li>
                     <li class="header-nav-item">
                         <a href="">{{user.full_name}}</a>
                         <ul class="sub-nav" >

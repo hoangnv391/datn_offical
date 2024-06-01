@@ -747,7 +747,7 @@ def update_user_info(request):
             else:
                 return render(request, "update-user-info.html",{
                     'user': current_user,
-                    'error': "Mật khẩu cũ không đúng"
+                    'error': "Mật khẩu hiện tại không đúng"
                 })
         else:
             current_user.save()
