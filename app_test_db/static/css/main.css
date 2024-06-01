@@ -909,3 +909,41 @@ li.header-nav-item.header-search {
     transform: skewX(30deg);
 } */
 /* End: Adding CSS for header */
+
+/* Start: CSS for sub nav */
+
+.header-nav-item {
+    position: relative;
+}
+
+#header-nav .sub-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    z-index: 2;
+    /* width: 100px; */
+}
+
+#header-nav li:hover .sub-nav {
+    display: block;
+}
+
+.sub-nav li{
+    background-color: #e5091c;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    text-transform: uppercase;
+    min-width: 100px;
+}
+
+/* #header-nav .subnav > a {
+    color: white;
+    display: block;
+    width: 100%;
+    text-transform: uppercase;
+} */
+
+.swiper-slide {
+    z-index: -1;
+}
+/* End: CSS for sub nav */

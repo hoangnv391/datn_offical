@@ -16,4 +16,7 @@ urlpatterns = [
     path("order/detail/<int:order_id>", views.order_detail, name="order-detail"),
     path("order/order-bill-download/<int:order_id>", views.order_bill_download, name="order-bill-download"),
     path("search", views.search_engine, name='search'),
+    path("search/brand/<int:brand_id>", views.search_brand, name="search-brand"),
+    path("search/type/<int:type_id>", views.search_type, name="search-type"),
+    path("user/update-info", views.update_user_info, name='update-user-info')
 ]

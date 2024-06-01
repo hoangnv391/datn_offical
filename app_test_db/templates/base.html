@@ -56,8 +56,22 @@
             <div id="wide-nav" class="wrapper">
                 <ul id="header-nav">
                     <li class="header-nav-item"><a href="{% url "home" %}">Trang chủ</a></li>
-                    <li class="header-nav-item"><a href="#">Hãng xe</a></li>
-                    <li class="header-nav-item"><a href="#">Dòng xe</a></li>
+                    <li class="header-nav-item">
+                        <a href="#">Hãng xe</a>
+                        <ul class="sub-nav">
+                            {% for brand in brands_cat %}
+                            <li><a href="{% url "search-brand" brand_id=brand.brand_id%}">{{brand.brand_name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="header-nav-item">
+                        <a href="#">Dòng xe</a>
+                        <ul class="sub-nav">
+                            {% for type in motorbike_types_cat %}
+                            <li><a href="{% url "search-type" type_id=type.type_id %}">{{type.type_name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
 
                     <li class="header-nav-item header-search">
                         <form class="search-form flex" action="{% url "search" %}" method="post">
@@ -70,9 +84,17 @@
                     {% if user != None %}
                     <li class="header-nav-item"><a href="{% url "order-list" %}">Đơn hàng</a></li>
                     <li class="header-nav-item"><a href="{% url "cart" %}">Giỏ hàng</a></li>
-                    <li class="header-nav-item"><a href="{% url "logout" %}">Đăng xuất</a></li>
+                    <li class="header-nav-item">
+                        <a href="">{{user.full_name}}</a>
+                        <ul class="sub-nav" >
+                            <li><a href="{% url "update-user-info" %}" style="text-transform: none;">Cập nhật thông tin</a></li>
+                            <li><a href="{% url "logout" %}" style="text-transform: none;">Đăng xuất</a></li>
+                        </ul>
+                    </li>
+
                     {% else %}
                     <li class="header-nav-item"><a href="{% url "login" %}">Đăng nhập</a></li>
+                    <li class="header-nav-item"><a href="{% url "signup" %}">Đăng ký</a></li>
                     {% endif %}
                 </ul>
             </div>

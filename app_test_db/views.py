@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from .forms import UserForm
-from .models import users, brands, motorbikes, motorbike_skus, motorbike_feature_images, motorbike_specs, cart_items, orders, order_items
+from .models import users, brands, motorbikes, motorbike_skus, motorbike_feature_images, motorbike_specs, cart_items, orders, order_items, motor_types
 from django.http import HttpResponse, JsonResponse, FileResponse, StreamingHttpResponse
 import json
 from datetime import date
@@ -10,6 +10,25 @@ from .pdf_engine import PDF, money_format
 from fpdf import FPDF
 from pathlib import Path
 import os
+
+
+# functions
+def get_brands():
+    return brands.objects.all().order_by('brand_order')
+
+def get_motor_types():
+    return motor_types.objects.all().order_by('type_id')
+
+def get_current_user(request):
+    user_id = request.session.get("user_id")
+    user = None
+
+    if (user_id):
+        user = users.objects.get(user_id = user_id)
+
+    return user
+
+
 # Create your views here.
 def login(request):
     if request.method == "POST":
@@ -79,6 +98,7 @@ def signup(request):
 def home(request):
     motor_brands = brands.objects.all().order_by('brand_order')
     motorbike_list = motorbikes.objects.all().order_by('motorbike_id')
+    motorbike_types = motor_types.objects.all()
     home_skus = []
     default_skus = []
     count = 0
@@ -142,6 +162,9 @@ def home(request):
         'skus': home_skus,
         'default_option': default_skus,
         'user': user,
+        'motorbike_types': motorbike_types,
+        'brands_cat': motor_brands,
+        'motorbike_types_cat': motorbike_types,
     })
 
 def motor_detail(request, slug):
@@ -488,7 +511,7 @@ def search_engine(request):
     result_motor_list = []
     result_brand_list = []
     result_sku_list = []
-    result_defaut_option = []
+    result_default_option = []
 
     motors = motorbikes.objects.all()
 
@@ -504,18 +527,49 @@ def search_engine(request):
 
                 tmp_skus = motorbike_skus.objects.filter(motorbike = motor)
 
-                result_sku_list.extend(list(tmp_skus))
-                result_defaut_option.append(tmp_skus[0])
+                # result_sku_list.extend(list(tmp_skus))
+                # result_default_option.append(tmp_skus[0])
 
     result_motor_list       = list(set(result_motor_list))
+
+    for motor in result_motor_list:
+        tmp_skus = motorbike_skus.objects.filter(motorbike = motor).order_by('price')
+        options = []
+
+        for sku in tmp_skus:
+            options.append(sku.option)
+
+        options = list(set((options)))
+
+        if len(options) > 1:
+            tmp_options = [tmp_skus[0].option]
+            result_sku_list.append(tmp_skus[0])
+            result_default_option.append(tmp_skus[0])
+            count = 1
+
+            for sku in tmp_skus:
+                tmp_option = sku.option
+                if tmp_option not in tmp_options:
+                    tmp_options.append(sku.option)
+                    tmp_sku = tmp_skus.filter(option = tmp_option)
+                    for sku_1 in tmp_sku:
+                        if (sku_1.color) != (result_sku_list[count-1]).color:
+                            result_sku_list.append(sku_1)
+                            count = count+1
+                            break
+        # if an motorbike just have 1 option, ket take all of it's color version
+        else:
+            result_sku_list.extend(tmp_skus)
+            result_default_option.append(tmp_skus[0])
+
     result_brand_list       = list(set(result_brand_list))
     result_sku_list         = list(set(result_sku_list))
-    result_defaut_option    = list(set(result_defaut_option))
+    result_default_option    = list(set(result_default_option))
 
     print(result_motor_list, "\n")
     print(result_brand_list, "\n")
     print(result_sku_list, "\n")
-    print(result_defaut_option, "\n")
+    print(result_default_option, "\n")
 
     # print(key_list)
     # print(input_str)
@@ -524,6 +578,183 @@ def search_engine(request):
         'brands': result_brand_list,
         'motorbikes': result_motor_list,
         'skus': result_sku_list,
-        'default_option': result_defaut_option,
+        'default_option': result_default_option,
         'user': user,
     })
+
+def search_brand(request, brand_id):
+    user_id = request.session.get("user_id")
+    user = None
+
+
+
+    if (user_id):
+        user = users.objects.get(user_id = user_id)
+
+    target_brand_id = int(brand_id)
+    target_brand = brands.objects.get(brand_id = target_brand_id)
+
+    result_brand_list = []
+    result_motor_list = []
+    result_sku_list = []
+    result_default_option = []
+
+
+    result_brand_list.append(target_brand)
+    result_motor_list.extend(list(motorbikes.objects.filter(brand = target_brand).order_by('motorbike_id')))
+
+
+    #get unique color for unique option
+    for motor in result_motor_list:
+        tmp_skus = motorbike_skus.objects.filter(motorbike = motor).order_by('price')
+        options = []
+
+        for sku in tmp_skus:
+            options.append(sku.option)
+
+        options = list(set((options)))
+
+        if len(options) > 1:
+            tmp_options = [tmp_skus[0].option]
+            result_sku_list.append(tmp_skus[0])
+            result_default_option.append(tmp_skus[0])
+            count = 1
+
+            for sku in tmp_skus:
+                tmp_option = sku.option
+                if tmp_option not in tmp_options:
+                    tmp_options.append(sku.option)
+                    tmp_sku = tmp_skus.filter(option = tmp_option)
+                    for sku_1 in tmp_sku:
+                        if (sku_1.color) != (result_sku_list[count-1]).color:
+                            result_sku_list.append(sku_1)
+                            count = count+1
+                            break
+        # if an motorbike just have 1 option, ket take all of it's color version
+        else:
+            result_sku_list.extend(tmp_skus)
+            result_default_option.append(tmp_skus[0])
+
+
+    # motor_brands = get_brands()
+    # motorbike_types = get_motor_types()
+
+    return render(request, "search-text.html", {
+        'brands': result_brand_list,
+        'motorbikes': result_motor_list,
+        'skus': result_sku_list,
+        'default_option': result_default_option,
+        'user': user,
+        'brands_cat': get_brands(),
+        'motorbike_types_cat': get_motor_types(),
+    })
+
+
+def search_type(request, type_id):
+    user_id = request.session.get("user_id")
+    user = None
+
+
+
+    if (user_id):
+        user = users.objects.get(user_id = user_id)
+
+    target_type_id = int(type_id)
+    target_type = motor_types.objects.get(type_id = target_type_id)
+
+    result_brand_list = []
+    result_motor_list = []
+    result_sku_list = []
+    result_default_option = []
+
+
+    # result_brand_list.append(target_brand)
+    result_motor_list.extend(list(motorbikes.objects.filter(type = target_type).order_by('motorbike_id')))
+    result_brand_list.append((result_motor_list[0]).brand)
+
+
+    #get unique color for unique option
+    for motor in result_motor_list:
+
+        # get brand
+        if motor.brand not in result_brand_list:
+            result_brand_list.append(motor.brand)
+
+        tmp_skus = motorbike_skus.objects.filter(motorbike = motor).order_by('price')
+
+        tmp_options = [tmp_skus[0].option]
+        result_sku_list.append(tmp_skus[0])
+        result_default_option.append(tmp_skus[0])
+        count = 1
+
+        for sku in tmp_skus:
+            tmp_option = sku.option
+            if tmp_option not in tmp_options:
+                tmp_options.append(sku.option)
+                tmp_sku = tmp_skus.filter(option = tmp_option)
+                for sku_1 in tmp_sku:
+                    if (sku_1.color) != (result_sku_list[count-1]).color:
+                        result_sku_list.append(sku_1)
+                        count = count+1
+                        break
+
+    # motor_brands = get_brands()
+    # motorbike_types = get_motor_types()
+
+    # sort result_brand_list by brand_order
+    result_brand_list = sorted(result_brand_list, key=lambda brand: brand.brand_id)
+
+    return render(request, "search-text.html", {
+        'brands': result_brand_list,
+        'motorbikes': result_motor_list,
+        'skus': result_sku_list,
+        'default_option': result_default_option,
+        'user': user,
+        'brands_cat': get_brands(),
+        'motorbike_types_cat': get_motor_types(),
+    })
+
+def update_user_info(request):
+    current_user = get_current_user(request)
+
+    if request.method == 'POST':
+        full_name = request.POST.get('full_name')
+        address = request.POST.get('address')
+        email = request.POST.get('email')
+
+        current_user.full_name = full_name
+        current_user.address = address
+        current_user.email = email
+
+
+        changePassword = request.POST.get('changePassword')
+
+        if changePassword == 'on':
+            password = request.POST.get('old_password')
+            new_password = request.POST.get('new_password')
+            confirm_new_password = request.POST.get('confirm_new_password')
+
+            if password == current_user.password:
+                if new_password == confirm_new_password:
+                    current_user.password = new_password
+                    current_user.save()
+                    return redirect("login")
+                else:
+                    return render(request, "update-user-info.html",{
+                        'user': current_user,
+                        'error': "Mật khẩu xác nhận không đúng"
+                    })
+            else:
+                return render(request, "update-user-info.html",{
+                    'user': current_user,
+                    'error': "Mật khẩu cũ không đúng"
+                })
+        else:
+            current_user.save()
+            return redirect("home")
+
+    else:
+        return render(request, "update-user-info.html",{
+            'user': current_user,
+            'error': ""
+        })

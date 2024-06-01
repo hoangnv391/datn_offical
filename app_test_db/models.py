@@ -129,6 +129,7 @@ class motorbike_skus(models.Model):
                                limit_choices_to={'attribute_type': 'option'},
                                verbose_name='Cấu hình')
     sku_image = models.ImageField(upload_to='sku_images', null=True)
+    quantity = models.IntegerField(null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.motorbike.model} - {self.color} - {self.option} - {self.price}"

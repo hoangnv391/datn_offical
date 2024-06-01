@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cập nhật thông tin tài khoản </title>
+    <link rel="stylesheet" href="{% static "css/loginAndRegistration.css" %}">
+   </head>
+<body>
+  <div class="wrapper">
+    <div class="logo-wrapper flex">
+        <img class="logo" src="/logo/logo.png" alt="">
+    </div>
+    <div class="title-container flex">
+        <h2>Cập nhật thông tin tài khoản</h2>
+    </div>
+    <form method="post" action="">
+      {% csrf_token %}
+      <div class="input-box">
+        <input type="text" name="phone" placeholder="Số điện thoại" value="{{user.phone}}" disabled required>
+      </div>
+      <div class="input-box">
+        <input type="text" name="full_name" placeholder="Họ và tên" value="{{user.full_name}}" required>
+      </div>
+      <div class="input-box">
+        <input type="text" name="address" placeholder="Địa chỉ" value="{{user.address}}" required>
+      </div>
+      <div class="input-box">
+        <input type="text" name="email" placeholder="Email" value="{{user.email}}" required>
+      </div>
+      <input type="checkbox" id="changePassword" name="changePassword" onclick="togglePasswordFields()">
+      <label for="changePassword">Cập nhật mật khẩu</label>
+      <div class="input-box">
+        <input type="password" class="passwordField" name="old_password" placeholder="Mật khẩu cũ">
+      </div>
+      <div class="input-box">
+        <input type="password" class="passwordField" name="new_password" placeholder="Mật khẩu mới">
+      </div>
+      <div class="input-box">
+        <input type="password" class="passwordField" name="confirm_new_password" placeholder="Xác nhận mật khẩu mới">
+      </div>
+      {% if error != "" %}
+      <div class="input-box" style="text-align: center;">
+        <p style="color: red; font-weight: bold;">{{ error }}</p>
+      </div>
+      {% endif %}
+      <div class="input-box button">
+        <input type="Submit" value="Cập nhật thông tin">
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function togglePasswordFields() {
+            var checkbox = document.getElementById('changePassword');
+            var passwordFields = document.getElementsByClassName('passwordField');
+
+            for (var i = 0; i < passwordFields.length; i++) {
+                passwordFields[i].required = checkbox.checked;
+            }
+        }
+  </script>
+</body>
+</html>
