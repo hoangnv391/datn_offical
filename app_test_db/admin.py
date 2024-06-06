@@ -119,6 +119,41 @@ class MotorbikeSpecAdmin(admin.ModelAdmin):
         models.TextField: {'widget': Textarea(attrs={'rows':3, 'cols':40})},
     }
 
+class OrderAdmin(admin.ModelAdmin):
+    list_filter = ["created_date", "user", "order_status"]
+
+class ReverseOrderFilter(admin.SimpleListFilter):
+    title = 'Order'
+    parameter_name = 'order'
+
+    def lookups(self, request, model_admin):
+        # Lấy danh sách các giá trị unique của trường 'order'
+        queryset = model_admin.get_queryset(request)
+        order_values = queryset.values_list('order', flat=True).distinct()
+
+        # Đảo ngược danh sách giá trị
+        # reversed_order_values = reversed(list(order_values))
+        reversed_order_values = (list(order_values))
+
+        # Trả về danh sách các lựa chọn
+        return [(value, str(value)) for value in reversed_order_values]
+
+    def queryset(self, request, queryset):
+        # Áp dụng bộ lọc dựa trên giá trị được chọn
+        if self.value():
+            return queryset.filter(order=self.value())
+        return queryset
+
+class ReverseChoicesFieldListFilter(admin.ChoicesFieldListFilter):
+    def choices(self, changelist):
+        choices = list(super().choices(changelist))
+        choices.reverse()
+        return choices
+
+class OrderItemAdmin(admin.ModelAdmin):
+    ordering = ['-order']
+    list_filter = (ReverseOrderFilter, )
+
 
 # Register your models here.
 # admin.site.register(test_table)
@@ -131,8 +166,8 @@ admin.site.register(motorbike_skus, SkuImageAdmin)
 admin.site.register(users)
 # admin.site.register(carts)
 admin.site.register(cart_items)
-admin.site.register(orders)
-admin.site.register(order_items)
+admin.site.register(orders, OrderAdmin)
+admin.site.register(order_items, OrderItemAdmin)
 # admin.site.register(image_table_test, ImageTestAdmin)
 admin.site.register(library_images, LibraryImageAdmin)
 admin.site.register(motorbike_specs, MotorbikeSpecAdmin)

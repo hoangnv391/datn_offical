@@ -354,10 +354,24 @@ def cart(request):
             new_order.updated_on = date.today()
             new_order.order_status = orders.Order_Status.ORDERED
             new_order.user = current_user
+
+            order_address = str(request.POST.get('address')).strip()
+
+            print("order address: ", order_address)
+
+            if (order_address):
+                new_order.address = order_address
+            else:
+                new_order.address = current_user.address
+
             new_order.save()
 
             # create new item order
             for item in items:
+                # cập nhật số lượng trong bảng skus
+                item.sku.quantity = item.sku.quantity - item.quantity
+                item.sku.save()
+
                 new_order_item = order_items()
                 new_order_item.quantity = item.quantity
                 new_order_item.order = new_order
@@ -494,7 +508,7 @@ def order_list(request):
     user_id = int(user_id)
 
     current_user = users.objects.get(user_id = user_id)
-    user_orders = orders.objects.filter(user = current_user).order_by('created_date', '-order_id')
+    user_orders = orders.objects.filter(user = current_user).order_by('-created_date', '-order_id')
     current_orders = {}
 
     for order in user_orders:
@@ -514,16 +528,17 @@ def order_detail(request, order_id):
 
     current_order = orders.objects.get(order_id = order_id)
 
-    current_user_id = int(request.session.get("user_id"))
+    current_user = get_current_user(request)
 
-    if current_user_id:
-        order_user_id = current_order.user.user_id
+    if current_user:
+        order_user = current_order.user
 
-        if current_user_id == order_user_id:
+        if current_user == order_user:
             current_order_items = order_items.objects.filter(order = current_order)
             return render(request, "order-detail.html", {
                 "order": current_order,
                 "items": current_order_items,
+                "user": current_user,
             })
         else:
             return redirect("login")

@@ -4,6 +4,8 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 # from django.utils.html import ma
 from django.utils.html import escape
 from django.utils.text import slugify
+from django.contrib import admin
+from django.core.exceptions import ValidationError
 
 # def year_choices():
 #     return [(r,r) for r in range(1984, datetime.today().year+1)]
@@ -232,6 +234,7 @@ class orders(models.Model):
         PROCESSING = 'processing', 'Đang xử lý'
         SUCCESS = 'success', 'Giao hàng thành công'
         CANCELED = 'canceled', 'Đã hủy'
+        DELIVERING = 'delivering', 'Đang vận chuyển'
 
     order_status = models.CharField(
         max_length=20,
@@ -251,11 +254,31 @@ class orders(models.Model):
                                verbose_name='Địa chỉ giao hàng',)
 
     def __str__(self) -> str:
-        return f"{self.user}"
+        return f"{self.order_id} - {self.user}"
+
+    def save(self, *args, **kwargs):
+        if (self.order_status == 'canceled'):
+            delete_order_items = order_items.objects.filter(order = self)
+            if (delete_order_items):
+            # re-add skus
+                for item in delete_order_items:
+                    item.sku.quantity = item.sku.quantity + item.quantity
+                    item.sku.save()
+                    item.delete()
+                super().save(*args, **kwargs)
+            else:
+                raise ValidationError("Đơn hàng đã được hủy từ trước, thao tác không thành công")
+        else:
+            previous_status = orders.objects.get(order_id = self.order_id).order_status
+            if previous_status == 'canceled':
+                raise ValidationError("Thao tác không hợp lệ, không thể thay đổi trạng thái của một đơn hàng đã hủy")
+            else:
+                super().save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'orders'
         db_table = 'orders'
+
 
 # 10th table: order_items
 class order_items(models.Model):
