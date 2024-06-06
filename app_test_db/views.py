@@ -10,6 +10,7 @@ from .pdf_engine import PDF, money_format
 from fpdf import FPDF
 from pathlib import Path
 import os
+from django.db import models
 
 
 # functions
@@ -108,6 +109,54 @@ def home(request):
 
     if (user_id):
         user = users.objects.get(user_id = user_id)
+
+    motor_1 = motorbikes.objects.get(model = "SH160i")
+    motor_2 = motorbikes.objects.get(model = "WAVE RSX FI 2024")
+    motor_3 = motorbikes.objects.get(model = "CBR150R")
+    motor_4 = motorbikes.objects.get(model = "SHARK 50cc")
+
+    motor_spec_1 = motorbike_specs.objects.get(motorbike = motor_1)
+    motor_spec_2 = motorbike_specs.objects.get(motorbike = motor_2)
+    motor_spec_3 = motorbike_specs.objects.get(motorbike = motor_3)
+    motor_spec_4 = motorbike_specs.objects.get(motorbike = motor_4)
+
+    motor_spec_list = [motor_spec_1, motor_spec_2, motor_spec_3, motor_spec_4]
+
+    obj = motor_spec_1
+
+    motor_spec_field = [field for field in obj._meta.get_fields() if not isinstance(field, models.AutoField)]
+
+    for motor in motorbike_list:
+        try:
+            corresponding_motor_spec = motorbike_specs.objects.get(motorbike = motor)
+        except:
+            new_motor_spec = motorbike_specs()
+            for motor_spec in motor_spec_list:
+                if motor_spec.motorbike.type == motor.type:
+                    new_motor_spec.motorbike = motor
+
+                    new_motor_spec.mass_ifself = motor_spec.mass_ifself
+                    new_motor_spec.length_width_height = motor_spec.length_width_height
+                    new_motor_spec.wheel_hub_spacing = motor_spec.wheel_hub_spacing
+                    new_motor_spec.ground_clearance = motor_spec.ground_clearance
+                    new_motor_spec.fuel_tank_capacity = motor_spec.fuel_tank_capacity
+                    new_motor_spec.layer_sizes = motor_spec.layer_sizes
+                    new_motor_spec.front_fork = motor_spec.front_fork
+                    new_motor_spec.rear_fork = motor_spec.rear_fork
+                    new_motor_spec.engine_type = motor_spec.engine_type
+                    new_motor_spec.max_power = motor_spec.max_power
+                    new_motor_spec.machine_viscosity_capacity = motor_spec.machine_viscosity_capacity
+                    new_motor_spec.fuel_consumption = motor_spec.fuel_consumption
+                    new_motor_spec.gearbox = motor_spec.gearbox
+                    new_motor_spec.drive_type = motor_spec.drive_type
+                    new_motor_spec.start_up_system = motor_spec.start_up_system
+                    new_motor_spec.max_moment = motor_spec.max_moment
+                    new_motor_spec.cylinder_capacity = motor_spec.mass_ifself
+                    new_motor_spec.diameter_plunger_stroke = motor_spec.diameter_plunger_stroke
+                    new_motor_spec.compression_ratio = motor_spec.compression_ratio
+
+                    new_motor_spec.save()
+
 
     # print(motorbike_list)
     for motor in motorbike_list:
